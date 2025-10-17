@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
 import Button from "./ui/Button";
 
-/**
- * Navbar: dark, sticky, glassy with mobile overlay.
- *
- * Links point to anchors: #about, #projects, #experience, #contact
- */
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("#hero");
+
   const nav = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
@@ -17,32 +15,72 @@ export default function Navbar() {
     { href: "#contact", label: "Contact" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+
+      const sections = nav.map((n) => document.querySelector(n.href));
+      for (let sec of sections) {
+        if (sec) {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActive(`#${sec.id}`);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed inset-x-6 top-6 z-50">
-      <nav className="mx-auto max-w-6xl bg-gradient-to-bl from-black/60 via-black/50 to-black/40 backdrop-blur-md border border-white/4 rounded-2xl px-5 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <a href="#hero" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 shadow-md flex items-center justify-center text-black font-bold">T</div>
-            <div className="hidden sm:block">
-              <div className="text-sm font-semibold text-slate-100">Tanjid</div>
-              <div className="text-xs text-slate-400 -mt-1">Full-Stack Engineer</div>
+    <header
+      className={`fixed inset-x-6 top-6 z-50 transition-all duration-300 ${
+        scrolled ? "py-3" : "py-5"
+      }`}
+    >
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`mx-auto max-w-6xl bg-gradient-to-bl from-black/60 via-black/50 to-black/40 border-white/4 rounded-2xl flex items-center justify-between px-5 py-3`}
+      >
+        {/* Logo */}
+        <a href="#hero" className="flex items-center gap-3 group">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 shadow-md flex items-center justify-center text-black font-bold transition-all"
+          >
+            T
+          </motion.div>
+          <div className="hidden sm:block">
+            <div className="text-sm font-semibold text-slate-100 group-hover:text-cyan-300 transition">
+              Tanjid
             </div>
-          </a>
-        </div>
+            <div className="text-xs text-slate-400 -mt-1">Full-Stack Engineer</div>
+          </div>
+        </a>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
           <ul className="flex items-center gap-6 text-sm text-slate-300">
             {nav.map((n) => (
-              <li key={n.href}>
-                <a href={n.href} className="hover:text-cyan-300 transition-colors">
+              <li key={n.href} className="relative">
+                <a
+                  href={n.href}
+                  className={`py-2 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:to-violet-400 after:transition-all hover:after:w-full ${
+                    active === n.href ? "after:w-full text-cyan-300" : ""
+                  }`}
+                >
                   {n.label}
                 </a>
               </li>
             ))}
           </ul>
-          <Button href="/resume.pdf" variant="solid" className="flex items-center gap-2">
-            <Download className="w-4 h-4" /> Resume
+          <Button href="/resume.pdf" variant="solid" className="flex items-center gap-2 group">
+            <Download className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            Resume
           </Button>
         </div>
 
@@ -66,28 +104,30 @@ export default function Navbar() {
               exit={{ opacity: 0, y: -8 }}
               className="absolute left-0 right-0 top-full mt-3"
             >
-              <div className="mx-3 rounded-xl bg-gradient-to-bl from-black/70 to-black/50 border border-white/6 p-5 shadow-xl">
+              <div className="mx-3 rounded-xl bg-gradient-to-bl from-black/70 to-black/50 border border-white/6 p-5 shadow-xl backdrop-blur-md">
                 <ul className="flex flex-col gap-4 text-slate-200">
                   {nav.map((n) => (
                     <li key={n.href}>
-                      <a onClick={() => setOpen(false)} href={n.href} className="block py-2 px-3 rounded hover:bg-white/5 transition">
+                      <a
+                        href={n.href}
+                        onClick={() => setOpen(false)}
+                        className="block py-2 px-3 rounded hover:bg-white/5 transition"
+                      >
                         {n.label}
                       </a>
                     </li>
                   ))}
                   <li className="pt-2">
-                    <a href="/resume.pdf" className="block">
-                      <Button href="/resume.pdf" variant="solid" className="w-full justify-center">
-                        <Download className="w-4 h-4" /> Resume
-                      </Button>
-                    </a>
+                    <Button href="/resume.pdf" variant="solid" className="w-full justify-center flex items-center gap-2">
+                      <Download className="w-4 h-4" /> Resume
+                    </Button>
                   </li>
                 </ul>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
+      </motion.nav>
     </header>
   );
 }

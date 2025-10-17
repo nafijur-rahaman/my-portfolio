@@ -56,7 +56,7 @@ export default function Contact() {
       <canvas id="contactParticles" className="absolute inset-0 pointer-events-none"></canvas>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <h2 className="text-5xl font-bold text-center text-cyan-400 mb-12 border-b-4 border-cyan-400 inline-block pb-2">
+        <h2 className="text-5xl font-bold border-b-4 border-cyan-400 inline-block pb-2 tracking-wide mb-16 text-center">
           Get in Touch
         </h2>
 

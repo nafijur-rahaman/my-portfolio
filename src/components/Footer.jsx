@@ -44,10 +44,12 @@ export default function Footer() {
       {/* Back-to-Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-400 to-violet-500 p-4 rounded-full shadow-lg text-black hover:scale-110 transition-transform z-50"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900  p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-50"
       >
         <FaArrowUp />
       </button>
     </footer>
   );
 }
+
+

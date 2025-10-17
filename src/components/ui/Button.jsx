@@ -1,11 +1,5 @@
 import React from "react";
 
-/**
- * Props:
- *  - href (optional) -> render anchor
- *  - variant -> 'solid' | 'ghost'
- *  - className -> extra tailwind classes
- */
 export default function Button({ href, onClick, children, variant = "solid", className = "" }) {
   const base = "inline-flex items-center gap-3 rounded-lg px-5 py-2.5 text-sm font-semibold transition-transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500/50";
   const styles = {

@@ -2,56 +2,103 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import Tilt from "react-parallax-tilt";
-import pimg from "../assets/image.png";
-
+import pimg from "../assets/image.png"; // fallback or default image
 const projectsData = [
   {
-    title: "E-Commerce Platform",
+    title: "LifeSure – Modern Life Insurance Tech Platform",
     description:
-      "A full-stack e-commerce site with payment integration, admin dashboard, user authentication, and responsive design. Optimized for performance and SEO.",
-    image: pimg,
-    frontend: ["React", "Tailwind CSS", "Framer Motion"],
-    backend: ["Node.js", "MongoDB", "Stripe"],
-    demo: "#",
-    github: "#",
-    category: "Full-Stack",
+      "LifeSure is a modern life insurance tech startup bringing transparency and trust to the industry. Users can explore policies, generate personalized quotes, connect with expert agents, manage their insurance digitally, and handle claims and payments through a seamless web platform.",
+    image: "/assets/lifesure.jpg",
+    frontend: ["React.js", "Tailwind CSS"],
+    backend: ["Node.js", "Express.js", "MongoDB", "JWT & Role-based Authentication", "Stripe Payments"],
+    demo: "https://lifesure-client.vercel.app/",
+    githubFrontend: "https://github.com/nafijur-rahaman/Lifesure-Client",
+    githubBackend: "https://github.com/nafijur-rahaman/Lifesure-Server",
+    features: [
+      "Policy Exploration with detailed descriptions",
+      "Instant Quote Generation",
+      "Agent Connect for calls or chat",
+      "Dashboard Overview of policies, payments, and claims",
+      "Secure Authentication (JWT & Role-based)",
+      "Online Payments via Stripe",
+      "Digital Policy Management",
+      "Notifications & Reminders for premiums",
+      "Responsive Design",
+      "Claims Processing",
+      "Admin Control Panel",
+      "Analytics Dashboard"
+    ]
   },
   {
-    title: "Portfolio Website",
+    title: "Tuition Media Platform",
     description:
-      "Personal portfolio to showcase projects, blogs, skills, and resume download. Fully responsive with smooth animations and light/dark mode support.",
-    image: "/assets/project2.jpg",
-    frontend: ["React", "Tailwind CSS", "Framer Motion"],
-    backend: [],
+      "A platform connecting students with tutors for personalized learning experiences. Students can post tuition requests, browse tutor listings, give reviews, and manage profiles. Admins can manage users and tuition posts.",
+    image: "/assets/tuition-media.jpg",
+    frontend: ["HTML5", "CSS", "Bootstrap", "JavaScript", "React", "Tailwind CSS"],
+    backend: ["Django REST Framework", "PostgreSQL", "Cloudinary for media storage"],
     demo: "#",
-    github: "#",
-    category: "Frontend",
+    githubFrontend: "https://github.com/nafijur-rahaman/Tution-Media-platform-frontend",
+    githubBackend: "https://github.com/nafijur-rahaman/Tution-Media-Platform-Backend-",
+    features: [
+      "User Authentication & Role-based Access",
+      "Profile Management for Students and Tutors",
+      "Create and Manage Tuition Posts",
+      "Tutor Listings with Search & Filters",
+      "Reviews & Ratings",
+      "Admin Management of Users and Posts",
+      "Responsive Design"
+    ]
   },
   {
-    title: "Task Manager API",
+    title: "Tripora – Travel Package Management",
     description:
-      "RESTful API for task management with JWT authentication, role-based access, and PostgreSQL database integration. Deployed with Docker for easy scalability.",
-    image: "/assets/project3.jpg",
-    frontend: [],
-    backend: ["Django REST", "PostgreSQL", "Docker"],
-    demo: "#",
-    github: "#",
-    category: "Backend",
+      "A full-stack travel package management system with React + Tailwind CSS frontend and Node.js + Express + MongoDB + Firebase backend. Features secure user authentication, CRUD for travel packages, booking management, category management, and smooth animations.",
+    image: "/assets/tripora.jpg",
+    frontend: ["React", "Tailwind CSS", "Framer Motion", "React Slick", "Axios", "React Router"],
+    backend: ["Node.js", "Express.js", "MongoDB Atlas", "Firebase Admin SDK", "CORS", "JWT-based Token Verification"],
+    demo: "https://tripora-frontend.vercel.app",
+    githubFrontend: "https://github.com/nafijur-rahaman/Tripora-Frontend",
+    githubBackend: "https://github.com/nafijur-rahaman/Tripora-Backend",
+    features: [
+      "User Authentication with Firebase",
+      "CRUD Operations for Travel Packages",
+      "Package Booking Management",
+      "Category Management",
+      "Token-protected APIs",
+      "Responsive Frontend",
+      "Smooth Animations",
+      "Interactive Carousels"
+    ]
   },
+  {
+  title: "Donation Platform",
+  description:
+    "A platform enabling users to browse donation campaigns, make contributions, and track donation history. Donors, campaign organizers, and admins can securely manage accounts and campaigns, with integrated payment processing for smooth transactions.",
+  image: "/assets/donation-platform.jpg",
+  frontend: ["HTML5", "Tailwind CSS", "JavaScript"],
+  backend: ["Django", "PostgreSQL", "Cloudinary", "SSLCommerz Payment Integration"],
+  demo: "#",
+  githubFrontend: "https://github.com/nafijur-rahaman/Donation-platofrm-frontend",
+  githubBackend: "https://github.com/nafijur-rahaman/Donation-platform-backend",
+  features: [
+    "User Authentication with role-based access (Donor, Organizer, Admin)",
+    "Create, update, delete, and manage donation campaigns",
+    "Browse and filter campaigns with progress tracking",
+    "Secure donation processing via SSLCommerz",
+    "Donation History tracking with receipts",
+    "Responsive design for mobile, tablet, and desktop",
+    "Cloud storage for campaign media via Cloudinary",
+    "Scalable API to handle high traffic and transactions"
+  ]
+}
+
 ];
 
-const categories = ["All", "Frontend", "Backend", "Full-Stack"];
 
 export default function Projects() {
-  const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const filteredProjects =
-    filter === "All"
-      ? projectsData
-      : projectsData.filter((p) => p.category === filter);
-
-  // Particle effect
+  // Particle effect (unchanged)
   useEffect(() => {
     const canvas = document.getElementById("projectParticles");
     if (!canvas) return;
@@ -70,7 +117,6 @@ export default function Projects() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw lines between nearby particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -87,14 +133,12 @@ export default function Projects() {
         }
       }
 
-      // Draw particles
       ctx.fillStyle = "rgba(100, 200, 255, 0.3)";
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Move particles
         p.x += p.dx;
         p.y += p.dy;
         if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
@@ -105,49 +149,32 @@ export default function Projects() {
     };
 
     draw();
-
-    // Update canvas on window resize
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <section id="projects" className="py-32 bg-gray-950 text-slate-100 relative overflow-hidden">
+    <section
+      id="projects"
+      className="py-36 bg-gray-950 text-slate-100 relative overflow-hidden"
+    >
       <canvas
         id="projectParticles"
         className="absolute inset-0 pointer-events-none"
       ></canvas>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <h2 className="text-5xl font-bold text-center text-cyan-400 mb-12">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <h2 className="text-5xl font-bold border-b-4 border-cyan-400 inline-block pb-2 tracking-wide mb-20 text-center">
           My Projects
         </h2>
 
-        {/* Filter Buttons */}
-        <div className="flex justify-center gap-4 mb-12 flex-wrap">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`px-4 py-2 rounded-xl font-semibold ${
-                filter === cat
-                  ? "bg-cyan-400 text-gray-900"
-                  : "bg-gray-800 text-slate-300 hover:bg-cyan-400/30"
-              } transition`}
-              onClick={() => setFilter(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, idx) => (
+          {projectsData.map((project, idx) => (
             <motion.div
               key={idx}
               initial={{ y: 30, opacity: 0 }}
@@ -163,7 +190,7 @@ export default function Projects() {
                 tiltMaxAngleY={10}
               >
                 <motion.div
-                  className="relative bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-lg rounded-3xl overflow-hidden cursor-pointer"
+                  className="relative bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-lg rounded-3xl overflow-hidden cursor-pointer h-full flex flex-col"
                   whileHover={{
                     scale: 1.05,
                     boxShadow:
@@ -183,7 +210,7 @@ export default function Projects() {
                   {/* Project Image */}
                   <div className="relative w-full h-48 overflow-hidden rounded-t-3xl z-10">
                     <img
-                      src={project.image}
+                      src={project.image || pimg}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                     />
@@ -198,36 +225,37 @@ export default function Projects() {
                   </div>
 
                   {/* Project Info */}
-                  <motion.div
-                    className="p-6 flex flex-col gap-4 relative z-10"
-                  >
-                    <h3 className="text-xl font-semibold text-slate-100">{project.title}</h3>
-                    <p className="text-slate-300 text-sm line-clamp-3">{project.description}</p>
+                  <motion.div className="p-6 flex flex-col flex-1 justify-between relative z-10">
+                    <div>
+                      <h3 className="text-xl font-semibold text-slate-100">
+                        {project.title}
+                      </h3>
+                      <p className="text-slate-300 text-sm line-clamp-3 mt-2">
+                        {project.description}
+                      </p>
 
-                    {/* Tech badges */}
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {project.frontend.map((tech) => (
-                        <motion.span
-                          key={tech}
-                          whileHover={{ scale: 1.1, rotate: [0, 2, -2, 0] }}
-                          className="px-3 py-1 text-xs rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                      {project.backend.map((tech) => (
-                        <motion.span
-                          key={tech}
-                          whileHover={{ scale: 1.1, rotate: [0, 2, -2, 0] }}
-                          className="px-3 py-1 text-xs rounded-full bg-green-400/20 text-green-400 font-medium"
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {project.frontend.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-xs rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.backend.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-xs rounded-full bg-green-400/20 text-green-400 font-medium"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="mt-4 flex gap-3">
+                    <div className="mt-4 flex gap-3 flex-wrap">
                       {project.demo && (
                         <a
                           href={project.demo}
@@ -237,13 +265,22 @@ export default function Projects() {
                           Live Demo <FaExternalLinkAlt className="w-3 h-3" />
                         </a>
                       )}
-                      {project.github && (
+                      {project.githubFrontend && (
                         <a
-                          href={project.github}
+                          href={project.githubFrontend}
                           target="_blank"
                           className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
                         >
-                          View Code <FaGithub className="w-3 h-3" />
+                          Frontend Code <FaGithub className="w-3 h-3" />
+                        </a>
+                      )}
+                      {project.githubBackend && (
+                        <a
+                          href={project.githubBackend}
+                          target="_blank"
+                          className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
+                        >
+                          Backend Code <FaGithub className="w-3 h-3" />
                         </a>
                       )}
                     </div>
@@ -254,77 +291,95 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Modal / Lightbox */}
-        {selectedProject && (
-          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-gray-900 rounded-3xl p-6 max-w-3xl w-full relative"
-            >
-              <button
-                className="absolute top-4 right-4 text-slate-200 text-2xl font-bold hover:text-cyan-400"
-                onClick={() => setSelectedProject(null)}
-              >
-                ×
-              </button>
+        {/* Modal */}
+{selectedProject && (
+  <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6">
+    <motion.div
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.8, opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="bg-gray-900 rounded-3xl p-6 max-w-3xl w-full relative"
+    >
+      <button
+        className="absolute top-4 right-4 text-slate-200 text-2xl font-bold hover:text-cyan-400"
+        onClick={() => setSelectedProject(null)}
+      >
+        ×
+      </button>
 
-              <img
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                className="w-full rounded-2xl mb-4"
-              />
-              <h3 className="text-2xl font-bold text-slate-100">
-                {selectedProject.title}
-              </h3>
-              <p className="text-slate-300 mt-2">
-                {selectedProject.description}
-              </p>
+      <img
+        src={selectedProject.image || pimg}
+        alt={selectedProject.title}
+        className="w-full rounded-2xl mb-4"
+      />
+      <h3 className="text-2xl font-bold text-slate-100">{selectedProject.title}</h3>
+      <p className="text-slate-300 mt-2">{selectedProject.description}</p>
 
-              <div className="flex flex-wrap gap-2 mt-3">
-                {selectedProject.frontend.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                {selectedProject.backend.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs rounded-full bg-green-400/20 text-green-400 font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+      {/* Features Section */}
+      {selectedProject.features && selectedProject.features.length > 0 && (
+        <div className="mt-4">
+          <h4 className="text-lg font-semibold text-slate-100 mb-2">Features:</h4>
+          <ul className="list-disc list-inside text-slate-300 space-y-1">
+            {selectedProject.features.map((feature, idx) => (
+              <li key={idx}>{feature}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-              <div className="mt-4 flex gap-3">
-                {selectedProject.demo && (
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-cyan-400/20 text-cyan-400 font-medium text-sm transition"
-                  >
-                    Live Demo <FaExternalLinkAlt className="w-3 h-3" />
-                  </a>
-                )}
-                {selectedProject.github && (
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
-                  >
-                    View Code <FaGithub className="w-3 h-3" />
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </div>
+      <div className="flex flex-wrap gap-2 mt-3">
+        {selectedProject.frontend.map((tech) => (
+          <span
+            key={tech}
+            className="px-3 py-1 text-xs rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
+          >
+            {tech}
+          </span>
+        ))}
+        {selectedProject.backend.map((tech) => (
+          <span
+            key={tech}
+            className="px-3 py-1 text-xs rounded-full bg-green-400/20 text-green-400 font-medium"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-4 flex gap-3 flex-wrap">
+        {selectedProject.demo && (
+          <a
+            href={selectedProject.demo}
+            target="_blank"
+            className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-cyan-400/20 text-cyan-400 font-medium text-sm transition"
+          >
+            Live Demo <FaExternalLinkAlt className="w-3 h-3" />
+          </a>
         )}
+        {selectedProject.githubFrontend && (
+          <a
+            href={selectedProject.githubFrontend}
+            target="_blank"
+            className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
+          >
+            Frontend Code <FaGithub className="w-3 h-3" />
+          </a>
+        )}
+        {selectedProject.githubBackend && (
+          <a
+            href={selectedProject.githubBackend}
+            target="_blank"
+            className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
+          >
+            Backend Code <FaGithub className="w-3 h-3" />
+          </a>
+        )}
+      </div>
+    </motion.div>
+  </div>
+)}
+
       </div>
     </section>
   );
