@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaCheck } from "react-icons/fa";
+import { send } from "@emailjs/browser";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: "", email: "", message: "" });
-    }, 2000);
+    setLoading(true);
+
+    const serviceId = import.meta.env.VITE_SERVICE_ID;
+    const templateId = import.meta.env.VITE_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+
+    send(serviceId, templateId, form, publicKey)
+      .then(() => {
+        setSubmitted(true);
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitted(false), 2000);
+      })
+      .catch((err) => {
+        console.error("Email send error:", err);
+        alert("Failed to send message. Try again!");
+      })
+      .finally(() => setLoading(false));
   };
 
   // Particle Background
@@ -51,9 +66,15 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contact" className="relative py-24 bg-gray-950 text-slate-100 overflow-hidden">
+    <section
+      id="contact"
+      className="relative py-24 bg-gray-950 text-slate-100 overflow-hidden"
+    >
       {/* Particle Canvas */}
-      <canvas id="contactParticles" className="absolute inset-0 pointer-events-none"></canvas>
+      <canvas
+        id="contactParticles"
+        className="absolute inset-0 pointer-events-none"
+      ></canvas>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <h2 className="text-5xl font-bold border-b-4 border-cyan-400 inline-block pb-2 tracking-wide mb-16 text-center">
@@ -83,7 +104,10 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-4 relative z-10">
+          <form
+            onSubmit={handleSubmit}
+            className="flex-1 flex flex-col gap-4 relative z-10"
+          >
             <input
               type="text"
               name="name"
@@ -115,27 +139,29 @@ export default function Contact() {
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 text-black font-semibold text-lg hover:shadow-lg transition flex items-center justify-center gap-2"
+              className="relative flex justify-center items-center mt-4 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
             >
-              {submitted ? (
-                <>
-                  Sent <FaCheck className="text-white w-4 h-4" />
-                </>
-              ) : (
-                <>
-                  Send Message <FaEnvelope className="w-4 h-4" />
-                </>
-              )}
+              {/* Icon on the left */}
+              <span className="absolute left-4 flex items-center">
+                {submitted ? <FaCheck className="w-5 h-5" /> : <FaEnvelope className="w-5 h-5" />}
+              </span>
+
+              {/* Centered text */}
+              <span>{loading ? "Sending..." : submitted ? "Sent" : "Send Message"}</span>
             </motion.button>
           </form>
 
           {/* Social Links */}
           <div className="flex-1 flex flex-col gap-6 justify-center relative z-10">
-            <h3 className="text-xl font-semibold text-slate-100">Connect with Me</h3>
-            <p className="text-slate-300">You can also reach me via social platforms:</p>
+            <h3 className="text-xl font-semibold text-slate-100">
+              Connect with Me
+            </h3>
+            <p className="text-slate-300">
+              You can also reach me via social platforms:
+            </p>
             <div className="flex gap-4 mt-2">
               <motion.a
-                href="https://github.com/yourusername"
+                href="https://github.com/nafijur-rahaman"
                 target="_blank"
                 whileHover={{ scale: 1.2 }}
                 className="text-2xl text-slate-100 hover:text-cyan-400 transition"
@@ -143,7 +169,7 @@ export default function Contact() {
                 <FaGithub />
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/nafijur-rahaman"
                 target="_blank"
                 whileHover={{ scale: 1.2 }}
                 className="text-2xl text-slate-100 hover:text-blue-500 transition"
@@ -151,7 +177,7 @@ export default function Contact() {
                 <FaLinkedin />
               </motion.a>
               <motion.a
-                href="mailto:yourmail@example.com"
+                href="mailto:tanjidnafis@gmail.com"
                 whileHover={{ scale: 1.2 }}
                 className="text-2xl text-slate-100 hover:text-rose-500 transition"
               >
