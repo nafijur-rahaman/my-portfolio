@@ -303,55 +303,51 @@ export default function Projects() {
 
 {/* Modal */}
 {selectedProject && (
-  <div
-    className="fixed inset-0 bg-black/60 z-[99999] flex items-end justify-center md:items-start"
-    onClick={() => setSelectedProject(null)}
-  >
-    <motion.div
-      initial={{ y: "100%", opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: "100%", opacity: 0 }}
-      transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      onClick={(e) => e.stopPropagation()}
-      className="
-        relative w-full md:max-w-4xl 
-        bg-gray-900 rounded-t-3xl md:rounded-3xl 
-        shadow-2xl overflow-hidden
-        max-h-[calc(100vh-4.5rem)] md:max-h-[calc(100vh-6rem)]
-        mt-[4.5rem] md:mt-[6rem]
-        flex flex-col
-      "
-    >
+<div
+  className="fixed inset-0 bg-black/60 z-[9999] flex items-end md:items-start justify-center pt-32 md:pt-24"
+  onClick={() => setSelectedProject(null)}
+>
+
+<motion.div
+  initial={{ y: "100%", opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  exit={{ y: "100%", opacity: 0 }}
+  transition={{ type: "spring", stiffness: 120, damping: 20 }}
+  className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[calc(100vh-6rem)] overflow-y-auto shadow-2xl relative"
+  onClick={(e) => e.stopPropagation()}
+>
+
+
       {/* Project Image */}
-      <div className="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-3xl">
+      <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
         <img
           src={selectedProject.image || pimg}
           alt={selectedProject.title}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
         />
-        <button
-          className="absolute top-3 right-3 text-slate-200 text-3xl font-bold hover:text-cyan-400"
-          onClick={() => setSelectedProject(null)}
-        >
-          ×
-        </button>
       </div>
 
-      {/* Modal Content */}
-      <div className="p-5 sm:p-6 overflow-y-auto">
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-100 mb-2">
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-slate-200 text-3xl font-bold hover:text-cyan-400"
+        onClick={() => setSelectedProject(null)}
+      >
+        ×
+      </button>
+
+      <div className="p-6">
+        {/* Title & Description */}
+        <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
           {selectedProject.title}
         </h3>
-        <p className="text-slate-300 mb-4 text-sm sm:text-base">
-          {selectedProject.description}
-        </p>
+        <p className="text-slate-300 mb-4">{selectedProject.description}</p>
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2 mb-4">
           {selectedProject.frontend.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 text-xs sm:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
+              className="px-3 py-1 text-xs md:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
             >
               {tech}
             </span>
@@ -359,7 +355,7 @@ export default function Projects() {
           {selectedProject.backend.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 text-xs sm:text-sm rounded-full bg-green-400/20 text-green-400 font-medium"
+              className="px-3 py-1 text-xs md:text-sm rounded-full bg-green-400/20 text-green-400 font-medium"
             >
               {tech}
             </span>
@@ -370,7 +366,7 @@ export default function Projects() {
         {selectedProject.features && (
           <div className="mb-4">
             <h4 className="text-lg font-semibold text-slate-100 mb-2">Features</h4>
-            <ul className="list-disc list-inside text-slate-300 space-y-1 max-h-40 overflow-y-auto pr-2 text-sm sm:text-base">
+            <ul className="list-disc list-inside text-slate-300 space-y-1 max-h-40 overflow-y-auto pr-2">
               {selectedProject.features.map((feature, idx) => (
                 <li key={idx}>{feature}</li>
               ))}
@@ -378,15 +374,13 @@ export default function Projects() {
           </div>
         )}
 
-        {/* Buttons */}
-        <div className="flex flex-wrap gap-3 mt-4">
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-3">
           {selectedProject.demo && (
             <a
               href={selectedProject.demo}
               target="_blank"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 
-                         px-4 py-2 rounded-md bg-cyan-500 hover:bg-cyan-600 
-                         text-white font-semibold text-sm sm:text-base transition"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm transition"
             >
               Live Demo <FaExternalLinkAlt className="w-3 h-3" />
             </a>
@@ -395,9 +389,7 @@ export default function Projects() {
             <a
               href={selectedProject.githubFrontend}
               target="_blank"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 
-                         px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 
-                         text-white font-semibold text-sm sm:text-base transition"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
             >
               Frontend Code <FaGithub className="w-3 h-3" />
             </a>
@@ -406,9 +398,7 @@ export default function Projects() {
             <a
               href={selectedProject.githubBackend}
               target="_blank"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 
-                         px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 
-                         text-white font-semibold text-sm sm:text-base transition"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
             >
               Backend Code <FaGithub className="w-3 h-3" />
             </a>
