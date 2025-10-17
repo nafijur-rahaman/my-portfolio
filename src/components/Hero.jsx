@@ -86,10 +86,10 @@ export default function Hero() {
       </div>
 
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-10 left-10 w-[280px] md:w-[400px]  h-[400px] bg-cyan-500/20 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+      <div className="max-w-6xl mx-auto mt-32 md:mt-0 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
         {/* Left Text Section */}
         <div className="md:col-span-7 flex flex-col gap-6">
           <motion.h1
@@ -118,18 +118,25 @@ export default function Hero() {
             detail.
           </motion.p>
 
-          <div className="flex gap-4 items-center mt-4">
+          <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4 items-center mt-4">
             <motion.a
               href="#projects"
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 font-semibold rounded-3xl shadow-lg hover:shadow-cyan-400/50 hover:scale-105 transition-all duration-300"
+              className="w-full sm:w-auto text-center inline-flex justify-center items-center px-5 sm:px-6 py-2.5 sm:py-3 
+               bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 font-semibold 
+               rounded-3xl shadow-lg hover:shadow-cyan-400/50 hover:scale-105 
+               transition-all duration-300"
             >
               View Projects <ArrowRight className="w-4 h-4 ml-2" />
             </motion.a>
+
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.05 }}
-              className="px-6 py-2 rounded-full border border-cyan-400 text-cyan-400 font-semibold text-lg hover:bg-cyan-400/10 transition"
+              className="w-full sm:w-auto text-center px-5 sm:px-6 py-2 sm:py-2.5 
+               rounded-full border border-cyan-400 text-cyan-400 
+               font-semibold text-base sm:text-lg 
+               hover:bg-cyan-400/10 transition"
             >
               Get in Touch
             </motion.a>

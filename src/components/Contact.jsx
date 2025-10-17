@@ -139,15 +139,22 @@ export default function Contact() {
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative flex justify-center items-center mt-4 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 font-semibold rounded-xl shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
+              className="w-full sm:w-auto flex justify-center items-center gap-2 mt-4 
+             px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 
+             text-gray-900 font-semibold rounded-xl shadow-lg 
+             hover:shadow-cyan-400/50 transition-all duration-300"
             >
               {/* Icon on the left */}
-              <span className="absolute left-27 flex items-center">
-                {submitted ? <FaCheck className="w-5 h-5" /> : <FaEnvelope className="w-5 h-5" />}
-              </span>
+              {submitted ? (
+                <FaCheck className="w-5 h-5 shrink-0" />
+              ) : (
+                <FaEnvelope className="w-5 h-5 shrink-0" />
+              )}
 
               {/* Centered text */}
-              <span>{loading ? "Sending..." : submitted ? "Sent" : "Send Message"}</span>
+              <span className="text-sm sm:text-base">
+                {loading ? "Sending..." : submitted ? "Sent" : "Send Message"}
+              </span>
             </motion.button>
           </form>
 

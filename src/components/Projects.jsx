@@ -183,123 +183,123 @@ export default function Projects() {
         </h2>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, idx) => (
+<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+  {projectsData.map((project, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ y: 30, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ delay: idx * 0.2, duration: 0.7 }}
+    >
+      <Tilt
+        glareEnable={true}
+        glareMaxOpacity={0.2}
+        glareColor="#06b6d4"
+        glarePosition="all"
+        tiltMaxAngleX={10}
+        tiltMaxAngleY={10}
+      >
+        <motion.div
+          className="relative bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-lg rounded-3xl overflow-hidden cursor-pointer h-full flex flex-col"
+          whileHover={{
+            scale: 1.05,
+            boxShadow:
+              "0 25px 50px rgba(0, 255, 255, 0.3), 0 15px 30px rgba(0, 255, 255, 0.2)",
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          onClick={() => setSelectedProject(project)}
+        >
+          {/* Project Image */}
+          <div className="relative w-full h-48 overflow-hidden rounded-t-3xl z-10">
+            <img
+              src={project.image || pimg}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
             <motion.div
-              key={idx}
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ delay: idx * 0.2, duration: 0.7 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileHover={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-semibold text-lg rounded-t-3xl z-20"
             >
-              <Tilt
-                glareEnable={true}
-                glareMaxOpacity={0.2}
-                glareColor="#06b6d4"
-                glarePosition="all"
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={10}
-              >
-                <motion.div
-                  className="relative bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-lg rounded-3xl overflow-hidden cursor-pointer h-full flex flex-col"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow:
-                      "0 25px 50px rgba(0, 255, 255, 0.3), 0 15px 30px rgba(0, 255, 255, 0.2)",
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  onClick={() => setSelectedProject(project)}
-                >
-                  {/* Glow Under Card */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-x-4 -bottom-4 h-8 rounded-full bg-cyan-400/20 blur-3xl z-0"
-                  />
-
-                  {/* Project Image */}
-                  <div className="relative w-full h-48 overflow-hidden rounded-t-3xl z-10">
-                    <img
-                      src={project.image || pimg}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileHover={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4 }}
-                      className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-semibold text-lg rounded-t-3xl z-20"
-                    >
-                      Click to view details
-                    </motion.div>
-                  </div>
-
-                  {/* Project Info */}
-                  <motion.div className="p-6 flex flex-col flex-1 justify-between relative z-10">
-                    <div>
-                      <h3 className="text-xl font-semibold text-slate-100">
-                        {project.title}
-                      </h3>
-                      <p className="text-slate-300 text-sm line-clamp-3 mt-2">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mt-3">
-                        {project.frontend.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 text-xs rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {project.backend.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 text-xs rounded-full bg-green-400/20 text-green-400 font-medium"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="mt-4 flex gap-3 flex-wrap">
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-cyan-400/20 text-cyan-400 font-medium text-sm transition"
-                        >
-                          Live Demo <FaExternalLinkAlt className="w-3 h-3" />
-                        </a>
-                      )}
-                      {project.githubFrontend && (
-                        <a
-                          href={project.githubFrontend}
-                          target="_blank"
-                          className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
-                        >
-                          Frontend Code <FaGithub className="w-3 h-3" />
-                        </a>
-                      )}
-                      {project.githubBackend && (
-                        <a
-                          href={project.githubBackend}
-                          target="_blank"
-                          className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100/10 hover:bg-green-400/20 text-green-400 font-medium text-sm transition"
-                        >
-                          Backend Code <FaGithub className="w-3 h-3" />
-                        </a>
-                      )}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </Tilt>
+              Click to view details
             </motion.div>
-          ))}
-        </div>
+          </div>
+
+          {/* Project Info */}
+          <motion.div className="p-5 sm:p-6 flex flex-col flex-1 justify-between relative z-10">
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
+                {project.title}
+              </h3>
+              <p className="text-slate-300 text-sm sm:text-base line-clamp-3 mt-2">
+                {project.description}
+              </p>
+
+              {/* 🧠 Responsive Tech Stack Badges */}
+              <div className="flex flex-wrap gap-2 mt-3">
+                {project.frontend.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-xs sm:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium whitespace-nowrap"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.backend.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-xs sm:text-sm rounded-full bg-green-400/20 text-green-400 font-medium whitespace-nowrap"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="mt-4 flex flex-wrap gap-3">
+              {project.demo && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
+                             bg-slate-100/10 hover:bg-cyan-400/20 
+                             text-cyan-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                >
+                  Live Demo <FaExternalLinkAlt className="w-3 h-3" />
+                </a>
+              )}
+              {project.githubFrontend && (
+                <a
+                  href={project.githubFrontend}
+                  target="_blank"
+                  className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
+                             bg-slate-100/10 hover:bg-green-400/20 
+                             text-green-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                >
+                  Frontend Code <FaGithub className="w-3 h-3" />
+                </a>
+              )}
+              {project.githubBackend && (
+                <a
+                  href={project.githubBackend}
+                  target="_blank"
+                  className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
+                             bg-slate-100/10 hover:bg-green-400/20 
+                             text-green-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                >
+                  Backend Code <FaGithub className="w-3 h-3" />
+                </a>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      </Tilt>
+    </motion.div>
+  ))}
+</div>
+
 
 {/* Modal */}
 {selectedProject && (

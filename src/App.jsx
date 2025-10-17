@@ -19,8 +19,9 @@ export default function App() {
         <Projects />
         <Experience />
         <Contact />
-      </main>
       <Footer></Footer>
+      </main>
+
     </div>
   );
 }
