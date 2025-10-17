@@ -50,15 +50,15 @@ export default function Navbar() {
         <a href="#hero" className="flex items-center gap-3 group">
           <motion.div
             whileHover={{ scale: 1.1, rotate: 5 }}
-            className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 shadow-md flex items-center justify-center text-black font-bold transition-all"
+            className="w-10 h-10 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 shadow-md flex items-center justify-center font-bold transition-all"
           >
-            T
+            N
           </motion.div>
           <div className="hidden sm:block">
             <div className="text-sm font-semibold text-slate-100 group-hover:text-cyan-300 transition">
-              Tanjid
+              Md. Nafijur Rahaman
             </div>
-            <div className="text-xs text-slate-400 -mt-1">Full-Stack Engineer</div>
+            <div className="text-xs text-slate-400 -mt-1">Full-Stack Developer</div>
           </div>
         </a>
 
@@ -78,10 +78,15 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <Button href="/resume.pdf" variant="solid" className="flex items-center gap-2 group">
-            <Download className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-            Resume
-          </Button>
+<a
+  href="/Md. Nafijur Rahaman (Full).pdf"
+  download
+  className="inline-flex items-center gap-2 px-3 py-2 rounded-xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 hover:from-cyan-500 hover:to-blue-600 transition-all duration-300 group"
+>
+  <Download className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+  Resume
+</a>
+
         </div>
 
         {/* Mobile hamburger */}
