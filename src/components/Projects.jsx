@@ -301,10 +301,10 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Modal */}
+{/* Modal */}
 {selectedProject && (
   <div
-    className="fixed inset-0 bg-black/60 z-[9999] flex items-end justify-center"
+    className="fixed inset-0 bg-black/60 z-[9999] flex items-end md:items-start justify-center pt-0 md:pt-24"
     onClick={() => setSelectedProject(null)}
   >
     <motion.div
@@ -312,19 +312,17 @@ export default function Projects() {
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative"
+      className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[calc(100vh-6rem)] overflow-y-auto shadow-2xl relative"
       onClick={(e) => e.stopPropagation()}
     >
-{/* Project Image */}
-<div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
-  <img
-    src={selectedProject.image || pimg}
-    alt={selectedProject.title}
-    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-  />
-
-</div>
-
+      {/* Project Image */}
+      <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
+        <img
+          src={selectedProject.image || pimg}
+          alt={selectedProject.title}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+        />
+      </div>
 
       {/* Close Button */}
       <button
@@ -407,10 +405,6 @@ export default function Projects() {
     </motion.div>
   </div>
 )}
-
-
-
-
 
 
       </div>
