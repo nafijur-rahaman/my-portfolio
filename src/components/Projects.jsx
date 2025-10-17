@@ -8,20 +8,19 @@ import donationImg from "../assets/donationImg.png";
 import tuitionImg from "../assets/tuitionImg.png";
 import lifesureImg from "../assets/lifesureImg.png";
 
+
+
+
+
+
 const projectsData = [
   {
     title: "LifeSure – Modern Life Insurance Tech Platform",
     description:
       "LifeSure is a modern life insurance tech startup bringing transparency and trust to the industry. Users can explore policies, generate personalized quotes, connect with expert agents, manage their insurance digitally, and handle claims and payments through a seamless web platform.",
     image: lifesureImg,
-    frontend: ["React.js", "Tailwind CSS"],
-    backend: [
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "JWT & Role-based Authentication",
-      "Stripe Payments",
-    ],
+    frontend: ["React.js", "Tailwind CSS", "Framer Motion", "React Slick", "Axios", "Firebase Auth"],
+    backend: ["Node.js", "Express.js", "MongoDB", "JWT & Role-based Auth", "Stripe Payments"],
     demo: "https://lifesure-client.vercel.app/",
     githubFrontend: "https://github.com/nafijur-rahaman/Lifesure-Client",
     githubBackend: "https://github.com/nafijur-rahaman/Lifesure-Server",
@@ -37,32 +36,19 @@ const projectsData = [
       "Responsive Design",
       "Claims Processing",
       "Admin Control Panel",
-      "Analytics Dashboard",
-    ],
+      "Analytics Dashboard"
+    ]
   },
   {
     title: "Tuition Media Platform",
     description:
       "A platform connecting students with tutors for personalized learning experiences. Students can post tuition requests, browse tutor listings, give reviews, and manage profiles. Admins can manage users and tuition posts.",
     image: tuitionImg,
-    frontend: [
-      "HTML5",
-      "CSS",
-      "Bootstrap",
-      "JavaScript",
-      "React",
-      "Tailwind CSS",
-    ],
-    backend: [
-      "Django REST Framework",
-      "PostgreSQL",
-      "Cloudinary for media storage",
-    ],
+    frontend: ["HTML5", "CSS", "Bootstrap", "JavaScript", "AJAX","jQuery","js libraries"],
+    backend: ["Django REST Framework", "PostgreSQL","Token & Role-based Auth", "docker","Cloudinary"],
     demo: "#",
-    githubFrontend:
-      "https://github.com/nafijur-rahaman/Tution-Media-platform-frontend",
-    githubBackend:
-      "https://github.com/nafijur-rahaman/Tution-Media-Platform-Backend-",
+    githubFrontend: "https://github.com/nafijur-rahaman/Tution-Media-platform-frontend",
+    githubBackend: "https://github.com/nafijur-rahaman/Tution-Media-Platform-Backend-",
     features: [
       "User Authentication & Role-based Access",
       "Profile Management for Students and Tutors",
@@ -70,30 +56,16 @@ const projectsData = [
       "Tutor Listings with Search & Filters",
       "Reviews & Ratings",
       "Admin Management of Users and Posts",
-      "Responsive Design",
-    ],
+      "Responsive Design"
+    ]
   },
   {
     title: "Tripora – Travel Package Management",
     description:
       "A full-stack travel package management system with React + Tailwind CSS frontend and Node.js + Express + MongoDB + Firebase backend. Features secure user authentication, CRUD for travel packages, booking management, category management, and smooth animations.",
     image: triporaImg,
-    frontend: [
-      "React",
-      "Tailwind CSS",
-      "Framer Motion",
-      "React Slick",
-      "Axios",
-      "React Router",
-    ],
-    backend: [
-      "Node.js",
-      "Express.js",
-      "MongoDB Atlas",
-      "Firebase Admin SDK",
-      "CORS",
-      "JWT-based Token Verification",
-    ],
+    frontend: ["React", "Tailwind CSS", "Framer Motion", "React Slick", "Axios", "React Router"],
+    backend: ["Node.js", "Express.js", "MongoDB Atlas", "Firebase Admin", "JWT-based Token Auth"],
     demo: "https://tripora-frontend.vercel.app",
     githubFrontend: "https://github.com/nafijur-rahaman/Tripora-Frontend",
     githubBackend: "https://github.com/nafijur-rahaman/Tripora-Backend",
@@ -105,38 +77,33 @@ const projectsData = [
       "Token-protected APIs",
       "Responsive Frontend",
       "Smooth Animations",
-      "Interactive Carousels",
-    ],
+      "Interactive Carousels"
+    ]
   },
   {
-    title: "Donation Platform",
-    description:
-      "A platform enabling users to browse donation campaigns, make contributions, and track donation history. Donors, campaign organizers, and admins can securely manage accounts and campaigns, with integrated payment processing for smooth transactions.",
-    image: donationImg,
-    frontend: ["HTML5", "Tailwind CSS", "JavaScript"],
-    backend: [
-      "Django",
-      "PostgreSQL",
-      "Cloudinary",
-      "SSLCommerz Payment Integration",
-    ],
-    demo: "#",
-    githubFrontend:
-      "https://github.com/nafijur-rahaman/Donation-platofrm-frontend",
-    githubBackend:
-      "https://github.com/nafijur-rahaman/Donation-platform-backend",
-    features: [
-      "User Authentication with role-based access (Donor, Organizer, Admin)",
-      "Create, update, delete, and manage donation campaigns",
-      "Browse and filter campaigns with progress tracking",
-      "Secure donation processing via SSLCommerz",
-      "Donation History tracking with receipts",
-      "Responsive design for mobile, tablet, and desktop",
-      "Cloud storage for campaign media via Cloudinary",
-      "Scalable API to handle high traffic and transactions",
-    ],
-  },
+  title: "Donation Platform",
+  description:
+    "A platform enabling users to browse donation campaigns, make contributions, and track donation history. Donors, campaign organizers, and admins can securely manage accounts and campaigns, with integrated payment processing for smooth transactions.",
+  image: donationImg,
+  frontend: ["HTML5", "Tailwind CSS", "JavaScript", "AJAX", "jQuery", "js libraries"],
+  backend: ["Django", "PostgreSQL", "Cloudinary", "docker",  "SSLCommerz Payment Integration"],
+  demo: "#",
+  githubFrontend: "https://github.com/nafijur-rahaman/Donation-platofrm-frontend",
+  githubBackend: "https://github.com/nafijur-rahaman/Donation-platform-backend",
+  features: [
+    "User Authentication with role-based access (Donor, Organizer, Admin)",
+    "Create, update, delete, and manage donation campaigns",
+    "Browse and filter campaigns with progress tracking",
+    "Secure donation processing via SSLCommerz",
+    "Donation History tracking with receipts",
+    "Responsive design for mobile, tablet, and desktop",
+    "Cloud storage for campaign media via Cloudinary",
+    "Scalable API to handle high traffic and transactions"
+  ]
+}
+
 ];
+
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -335,113 +302,117 @@ export default function Projects() {
         </div>
 
         {/* Modal */}
-        {selectedProject && (
-          <div
-            className="fixed inset-0 bg-black/60 z-[9999] flex items-end justify-center"
-            onClick={() => setSelectedProject(null)}
-          >
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative"
-              onClick={(e) => e.stopPropagation()}
+{selectedProject && (
+  <div
+    className="fixed inset-0 bg-black/60 z-[9999] flex items-end justify-center"
+    onClick={() => setSelectedProject(null)}
+  >
+    <motion.div
+      initial={{ y: '100%' }}
+      animate={{ y: 0 }}
+      exit={{ y: '100%' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+{/* Project Image */}
+<div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
+  <img
+    src={selectedProject.image || pimg}
+    alt={selectedProject.title}
+    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+  />
+
+</div>
+
+
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-slate-200 text-3xl font-bold hover:text-cyan-400"
+        onClick={() => setSelectedProject(null)}
+      >
+        ×
+      </button>
+
+      <div className="p-6">
+        {/* Title & Description */}
+        <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
+          {selectedProject.title}
+        </h3>
+        <p className="text-slate-300 mb-4">{selectedProject.description}</p>
+
+        {/* Tech Stack */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {selectedProject.frontend.map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 text-xs md:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
             >
-              {/* Project Image */}
-              <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
-                <img
-                  src={selectedProject.image || pimg}
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-              </div>
+              {tech}
+            </span>
+          ))}
+          {selectedProject.backend.map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 text-xs md:text-sm rounded-full bg-green-400/20 text-green-400 font-medium"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
 
-              {/* Close Button */}
-              <button
-                className="absolute top-4 right-4 text-slate-200 text-3xl font-bold hover:text-cyan-400"
-                onClick={() => setSelectedProject(null)}
-              >
-                ×
-              </button>
-
-              <div className="p-6">
-                {/* Title & Description */}
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
-                  {selectedProject.title}
-                </h3>
-                <p className="text-slate-300 mb-4">
-                  {selectedProject.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {selectedProject.frontend.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs md:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {selectedProject.backend.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs md:text-sm rounded-full bg-green-400/20 text-green-400 font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Features */}
-                {selectedProject.features && (
-                  <div className="mb-4">
-                    <h4 className="text-lg font-semibold text-slate-100 mb-2">
-                      Features
-                    </h4>
-                    <ul className="list-disc list-inside text-slate-300 space-y-1 max-h-40 overflow-y-auto pr-2">
-                      {selectedProject.features.map((feature, idx) => (
-                        <li key={idx}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* CTA Buttons */}
-                <div className="flex flex-wrap gap-3">
-                  {selectedProject.demo && (
-                    <a
-                      href={selectedProject.demo}
-                      target="_blank"
-                      className="flex items-center gap-2 px-4 py-2 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm transition"
-                    >
-                      Live Demo <FaExternalLinkAlt className="w-3 h-3" />
-                    </a>
-                  )}
-                  {selectedProject.githubFrontend && (
-                    <a
-                      href={selectedProject.githubFrontend}
-                      target="_blank"
-                      className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
-                    >
-                      Frontend Code <FaGithub className="w-3 h-3" />
-                    </a>
-                  )}
-                  {selectedProject.githubBackend && (
-                    <a
-                      href={selectedProject.githubBackend}
-                      target="_blank"
-                      className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
-                    >
-                      Backend Code <FaGithub className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+        {/* Features */}
+        {selectedProject.features && (
+          <div className="mb-4">
+            <h4 className="text-lg font-semibold text-slate-100 mb-2">Features</h4>
+            <ul className="list-disc list-inside text-slate-300 space-y-1 max-h-40 overflow-y-auto pr-2">
+              {selectedProject.features.map((feature, idx) => (
+                <li key={idx}>{feature}</li>
+              ))}
+            </ul>
           </div>
         )}
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-3">
+          {selectedProject.demo && (
+            <a
+              href={selectedProject.demo}
+              target="_blank"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm transition"
+            >
+              Live Demo <FaExternalLinkAlt className="w-3 h-3" />
+            </a>
+          )}
+          {selectedProject.githubFrontend && (
+            <a
+              href={selectedProject.githubFrontend}
+              target="_blank"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
+            >
+              Frontend Code <FaGithub className="w-3 h-3" />
+            </a>
+          )}
+          {selectedProject.githubBackend && (
+            <a
+              href={selectedProject.githubBackend}
+              target="_blank"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
+            >
+              Backend Code <FaGithub className="w-3 h-3" />
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  </div>
+)}
+
+
+
+
+
+
       </div>
     </section>
   );
