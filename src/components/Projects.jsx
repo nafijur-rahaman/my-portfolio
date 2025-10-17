@@ -307,14 +307,16 @@ export default function Projects() {
     className="fixed inset-0 bg-black/60 z-[9999] flex items-end md:items-start justify-center pt-0 md:pt-24"
     onClick={() => setSelectedProject(null)}
   >
-    <motion.div
-      initial={{ y: '100%' }}
-      animate={{ y: 0 }}
-      exit={{ y: '100%' }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[calc(100vh-6rem)] overflow-y-auto shadow-2xl relative"
-      onClick={(e) => e.stopPropagation()}
-    >
+<motion.div
+  initial={{ y: "100%", opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  exit={{ y: "100%", opacity: 0 }}
+  transition={{ type: "spring", stiffness: 120, damping: 20 }}
+  className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[calc(100vh-6rem)] overflow-y-auto shadow-2xl relative"
+  onClick={(e) => e.stopPropagation()}
+>
+
+
       {/* Project Image */}
       <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
         <img
