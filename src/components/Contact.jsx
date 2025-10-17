@@ -139,7 +139,7 @@ export default function Contact() {
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative flex justify-center items-center mt-4 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
+              className="relative flex justify-center items-center mt-4 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 font-semibold rounded-xl shadow-lg hover:shadow-cyan-400/50 transition-all duration-300"
             >
               {/* Icon on the left */}
               <span className="absolute left-27 flex items-center">
