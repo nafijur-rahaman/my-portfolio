@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter, FaArrowUp } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -11,32 +11,34 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         {/* Footer Info */}
         <div className="text-center md:text-left">
-          <p className="text-slate-400">© {new Date().getFullYear()} Tanjid. All rights reserved.</p>
-          <p className="text-slate-500 text-sm">Full-Stack Developer Portfolio</p>
+          <p className="text-slate-400">
+            © {new Date().getFullYear()} Nafis. All rights reserved.
+          </p>
+          <p className="text-slate-500 text-sm">Full-Stack Developer</p>
         </div>
 
         {/* Social Links */}
         <div className="flex gap-4">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/nafijur-rahaman"
             target="_blank"
             className="text-2xl text-slate-100 hover:text-cyan-400 transition"
           >
             <FaGithub />
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://linkedin.com/in/nafijur-rahaman"
             target="_blank"
             className="text-2xl text-slate-100 hover:text-blue-500 transition"
           >
             <FaLinkedin />
           </a>
           <a
-            href="https://twitter.com/yourusername"
+            href="mailto:tanjidnafis@gmail.com"
             target="_blank"
             className="text-2xl text-slate-100 hover:text-rose-500 transition"
           >
-            <FaTwitter />
+            <FaEnvelope />
           </a>
         </div>
       </div>
@@ -51,5 +53,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-
