@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
-import Tilt from "react-parallax-tilt";
 import { FaBriefcase } from "react-icons/fa";
 import ethicaldenLogo from "../assets/ethicalden.png";
 
@@ -102,46 +101,44 @@ export default function Experience() {
                   <FaBriefcase className="text-white w-6 h-6" />
                 </div>
 
-                <Tilt glareEnable={true} glareMaxOpacity={0.2} tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                  <div className="bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-xl rounded-2xl p-7 ml-6 shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-cyan-500/30">
-                    {/* Header */}
-                    <div className="flex items-center gap-4 mb-3">
-                      {exp.logo && (
-                        <img
-                          src={exp.logo}
-                          alt={exp.company}
-                          className="w-10 h-10 object-contain rounded-md bg-slate-800 p-1 border border-slate-700"
-                        />
-                      )}
-                      <div>
-                        <h3 className="text-xl font-semibold text-slate-100 leading-tight">{exp.title}</h3>
-                        <p className="text-sm text-slate-400">{exp.company}</p>
-                      </div>
+                <div className="bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-xl rounded-2xl p-7 ml-6 shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-cyan-500/30">
+                  {/* Header */}
+                  <div className="flex items-center gap-4 mb-3">
+                    {exp.logo && (
+                      <img
+                        src={exp.logo}
+                        alt={exp.company}
+                        className="w-10 h-10 object-contain rounded-md bg-slate-800 p-1 border border-slate-700"
+                      />
+                    )}
+                    <div>
+                      <h3 className="text-xl font-semibold text-slate-100 leading-tight">{exp.title}</h3>
+                      <p className="text-sm text-slate-400">{exp.company}</p>
                     </div>
-
-                    <p className="text-sm text-slate-500 mb-3">{exp.period}</p>
-
-                    <p className="text-slate-300 leading-relaxed">{exp.description}</p>
-
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {exp.tech.map((tech) => (
-                        <motion.span
-                          key={tech}
-                          whileHover={{ scale: 1.1, rotate: [0, 2, -2, 0] }}
-                          className="px-3 py-1 text-xs rounded-full font-medium bg-green-400/20 text-green-400 "
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                    </div>
-
-                    <span
-                      className={`inline-block mt-4 px-3 py-1 text-xs rounded-full font-medium text-white bg-gradient-to-r ${exp.color}`}
-                    >
-                      {exp.category}
-                    </span>
                   </div>
-                </Tilt>
+
+                  <p className="text-sm text-slate-500 mb-3">{exp.period}</p>
+
+                  <p className="text-slate-300 leading-relaxed">{exp.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {exp.tech.map((tech) => (
+                      <motion.span
+                        key={tech}
+                        whileHover={{ scale: 1.1, rotate: [0, 2, -2, 0] }}
+                        className="px-3 py-1 text-xs rounded-full font-medium bg-green-400/20 text-green-400"
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
+                  </div>
+
+                  <span
+                    className={`inline-block mt-4 px-3 py-1 text-xs rounded-full font-medium text-white bg-gradient-to-r ${exp.color}`}
+                  >
+                    {exp.category}
+                  </span>
+                </div>
               </motion.div>
             );
           })}
