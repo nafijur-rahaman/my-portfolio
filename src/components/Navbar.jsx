@@ -36,8 +36,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-6 top-6 z-50 transition-all duration-300 ${
-        scrolled ? "py-3" : "py-5"
+      className={`fixed inset-x-6 top-0 z-50 transition-all duration-300 py-0 md:py-3
       }`}
     >
       <motion.nav

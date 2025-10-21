@@ -98,7 +98,7 @@ export default function Experience() {
                 <div
                   className={`absolute -left-7 top-1 w-12 h-12 flex items-center justify-center rounded-full shadow-xl bg-gradient-to-r ${exp.color}`}
                 >
-                  <FaBriefcase className="text-white w-6 h-6" />
+                  <FaBriefcase className="text-black w-6 h-6" />
                 </div>
 
                 <div className="bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-xl rounded-2xl p-7 ml-6 shadow-2xl transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-cyan-500/30">
