@@ -71,7 +71,7 @@ export default function Navbar() {
               <li key={n.href} className="relative">
                 <a
                   href={n.href}
-                  className={`py-2 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:to-violet-400 after:transition-all hover:after:w-full ${
+                  className={`py-2 relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-gradient-to-r  font-semibold after:from-cyan-400 after:to-violet-400 after:transition-all hover:after:w-full ${
                     active === n.href ? "after:w-full text-cyan-300" : ""
                   }`}
                 >
@@ -83,7 +83,7 @@ export default function Navbar() {
           <a
             href="/Md. Nafijur Rahaman (Full).pdf"
             download
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 hover:from-cyan-500 hover:to-blue-600 transition-all duration-300 group"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 shadow-md hover:from-cyan-500 hover:to-blue-600 transition-all duration-300 group"
           >
             <Download className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             Resume

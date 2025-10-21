@@ -13,7 +13,7 @@ const experiences = [
       "Worked on Django, Django REST framework, APIs, database integration with PostgreSQL, and implementing RESTful endpoints for internal applications.",
     category: "Backend",
     tech: ["Django REST", "PostgreSQL", "Python", "Firebase", "WebSockets", "MySQL", "OAuth", "Git"],
-    color: "from-orange-400 to-amber-400",
+    color: "bg-gradient-to-r from-cyan-400 to-blue-500",
   },
 ];
 
@@ -134,7 +134,7 @@ export default function Experience() {
                   </div>
 
                   <span
-                    className={`inline-block mt-4 px-3 py-1 text-xs rounded-full font-medium text-white bg-gradient-to-r ${exp.color}`}
+                    className={`inline-block mt-4 px-3 py-1 text-xs rounded-full font-semibold text-black  bg-gradient-to-r ${exp.color}`}
                   >
                     {exp.category}
                   </span>
