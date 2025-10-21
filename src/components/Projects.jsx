@@ -6,7 +6,7 @@ import pimg from "../assets/image.png";
 import triporaImg from "../assets/trioporaImg.png";
 import donationImg from "../assets/donationImg.png";
 import tuitionImg from "../assets/tuitionImg.png";
-import lifesureImg from "../assets/lifesureImg.png";
+import lifesureImg from "../assets/lifesureProject.png";
 
 
 
@@ -46,7 +46,7 @@ const projectsData = [
     image: tuitionImg,
     frontend: ["HTML5", "CSS", "Bootstrap", "JavaScript", "AJAX","jQuery","js libraries"],
     backend: ["Django REST Framework", "PostgreSQL","Token & Role-based Auth", "docker","Cloudinary"],
-    demo: "#",
+    demo: "https://tuitionmedia.netlify.app/",
     githubFrontend: "https://github.com/nafijur-rahaman/Tution-Media-platform-frontend",
     githubBackend: "https://github.com/nafijur-rahaman/Tution-Media-Platform-Backend-",
     features: [
@@ -87,7 +87,7 @@ const projectsData = [
   image: donationImg,
   frontend: ["HTML5", "Tailwind CSS", "JavaScript", "AJAX", "jQuery", "js libraries"],
   backend: ["Django", "PostgreSQL", "Cloudinary", "docker",  "SSLCommerz Payment Integration"],
-  demo: "#",
+  demo: "https://donation-platform.netlify.app/",
   githubFrontend: "https://github.com/nafijur-rahaman/Donation-platofrm-frontend",
   githubBackend: "https://github.com/nafijur-rahaman/Donation-platform-backend",
   features: [
@@ -168,249 +168,219 @@ export default function Projects() {
   }, []);
 
   return (
-    <section
-      id="projects"
-      className="py-36 bg-gray-950 text-slate-100 relative overflow-hidden"
-    >
-      <canvas
-        id="projectParticles"
-        className="absolute inset-0 pointer-events-none"
-      ></canvas>
+<section
+  id="projects"
+  className="py-36 bg-gray-950 text-slate-100 relative overflow-hidden"
+>
+  <canvas
+    id="projectParticles"
+    className="absolute inset-0 pointer-events-none"
+  ></canvas>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <h2 className="text-5xl font-bold border-b-4 border-cyan-400 inline-block pb-2 tracking-wide mb-20 text-center">
-          My Projects
-        </h2>
+  <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <h2 className="text-5xl font-bold border-b-4 border-cyan-400 inline-block pb-2 tracking-wide mb-20 text-center">
+      My Projects
+    </h2>
 
-        {/* Projects Grid */}
-<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-  {projectsData.map((project, idx) => (
-    <motion.div
-      key={idx}
-      initial={{ y: 30, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      transition={{ delay: idx * 0.2, duration: 0.7 }}
-    >
-      <Tilt
-        glareEnable={true}
-        glareMaxOpacity={0.2}
-        glareColor="#06b6d4"
-        glarePosition="all"
-        tiltMaxAngleX={10}
-        tiltMaxAngleY={10}
-      >
+    {/* Projects Grid */}
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {projectsData.map((project, idx) => (
         <motion.div
-          className="relative bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-lg rounded-3xl overflow-hidden cursor-pointer h-full flex flex-col"
-          whileHover={{
-            scale: 1.05,
-            boxShadow:
-              "0 25px 50px rgba(0, 255, 255, 0.3), 0 15px 30px rgba(0, 255, 255, 0.2)",
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          onClick={() => setSelectedProject(project)}
+          key={idx}
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ delay: idx * 0.2, duration: 0.7 }}
+          className="flex flex-col"
         >
-          {/* Project Image */}
-          <div className="relative w-full h-48 overflow-hidden rounded-t-3xl z-10">
-            <img
-              src={project.image || pimg}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileHover={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-semibold text-lg rounded-t-3xl z-20"
-            >
-              Click to view details
-            </motion.div>
-          </div>
-
-          {/* Project Info */}
-          <motion.div className="p-5 sm:p-6 flex flex-col flex-1 justify-between relative z-10">
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
-                {project.title}
-              </h3>
-              <p className="text-slate-300 text-sm sm:text-base line-clamp-3 mt-2">
-                {project.description}
-              </p>
-
-              {/* 🧠 Responsive Tech Stack Badges */}
-              <div className="flex flex-wrap gap-2 mt-3">
-                {project.frontend.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs sm:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium whitespace-nowrap"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                {project.backend.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs sm:text-sm rounded-full bg-green-400/20 text-green-400 font-medium whitespace-nowrap"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+          <motion.div
+            className="relative bg-gradient-to-br from-black/60 via-black/40 to-black/50 backdrop-blur-lg rounded-3xl overflow-hidden cursor-pointer flex flex-col h-full min-h-[400px]"
+            whileHover={{
+              scale: 1.03,
+              boxShadow:
+                "0 20px 40px rgba(0, 255, 255, 0.2), 0 10px 20px rgba(0, 255, 255, 0.15)",
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            onClick={() => setSelectedProject(project)}
+          >
+            {/* Project Image */}
+            <div className="relative w-full h-48 overflow-hidden rounded-t-3xl z-10">
+              <img
+                src={project.image || pimg}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileHover={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-semibold text-lg rounded-t-3xl z-20"
+              >
+                Click to view details
+              </motion.div>
             </div>
 
+            {/* Project Info */}
+            <motion.div className="p-5 sm:p-6 flex flex-col flex-1 justify-between relative z-10">
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
+                  {project.title}
+                </h3>
+                <p className="text-slate-300 text-sm sm:text-base line-clamp-3 mt-2">
+                  {project.description.slice(0, 40)}...
+                </p>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="mt-4 flex flex-wrap gap-3">
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
+                               bg-slate-100/10 hover:bg-cyan-400/20 
+                               text-cyan-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                  >
+                    Live Demo <FaExternalLinkAlt className="w-3 h-3" />
+                  </a>
+                )}
+                {project.githubFrontend && (
+                  <a
+                    href={project.githubFrontend}
+                    target="_blank"
+                    className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
+                               bg-slate-100/10 hover:bg-green-400/20 
+                               text-green-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                  >
+                    Frontend Code <FaGithub className="w-3 h-3" />
+                  </a>
+                )}
+                {project.githubBackend && (
+                  <a
+                    href={project.githubBackend}
+                    target="_blank"
+                    className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
+                               bg-slate-100/10 hover:bg-green-400/20 
+                               text-green-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                  >
+                    Backend Code <FaGithub className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* Modal */}
+    {selectedProject && (
+      <div
+        className="fixed inset-0 bg-black/60 z-[9999] flex items-end md:items-start justify-center pt-32 md:pt-24"
+        onClick={() => setSelectedProject(null)}
+      >
+        <motion.div
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "100%", opacity: 0 }}
+          transition={{ type: "spring", stiffness: 120, damping: 20 }}
+          className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[calc(100vh-6rem)] overflow-y-auto shadow-2xl relative"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Project Image */}
+          <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
+            <img
+              src={selectedProject.image || pimg}
+              alt={selectedProject.title}
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            />
+          </div>
+
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 text-black bg-white w-8 h-8 rounded-full font-bold hover:bg-cyan-400 hover:text-white flex items-center justify-center"
+            onClick={() => setSelectedProject(null)}
+          >
+            ×
+          </button>
+
+          <div className="p-6">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
+              {selectedProject.title}
+            </h3>
+            <p className="text-slate-300 mb-4">
+              {selectedProject.description}
+            </p>
+
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {selectedProject.frontend.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1 text-xs md:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
+                >
+                  {tech}
+                </span>
+              ))}
+              {selectedProject.backend.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1 text-xs md:text-sm rounded-full bg-green-400/20 text-green-400 font-medium"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Features */}
+            {selectedProject.features && (
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold text-slate-100 mb-2">
+                  Features
+                </h4>
+                <ul className="list-disc list-inside text-slate-300 space-y-1 max-h-40 overflow-y-auto pr-2">
+                  {selectedProject.features.map((feature, idx) => (
+                    <li key={idx}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* CTA Buttons */}
-            <div className="mt-4 flex flex-wrap gap-3">
-              {project.demo && (
+            <div className="flex flex-wrap gap-3">
+              {selectedProject.demo && (
                 <a
-                  href={project.demo}
+                  href={selectedProject.demo}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
-                             bg-slate-100/10 hover:bg-cyan-400/20 
-                             text-cyan-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm transition"
                 >
                   Live Demo <FaExternalLinkAlt className="w-3 h-3" />
                 </a>
               )}
-              {project.githubFrontend && (
+              {selectedProject.githubFrontend && (
                 <a
-                  href={project.githubFrontend}
+                  href={selectedProject.githubFrontend}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
-                             bg-slate-100/10 hover:bg-green-400/20 
-                             text-green-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
                 >
                   Frontend Code <FaGithub className="w-3 h-3" />
                 </a>
               )}
-              {project.githubBackend && (
+              {selectedProject.githubBackend && (
                 <a
-                  href={project.githubBackend}
+                  href={selectedProject.githubBackend}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-md 
-                             bg-slate-100/10 hover:bg-green-400/20 
-                             text-green-400 font-medium text-sm sm:text-base transition w-full sm:w-auto"
+                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
                 >
                   Backend Code <FaGithub className="w-3 h-3" />
                 </a>
               )}
             </div>
-          </motion.div>
-        </motion.div>
-      </Tilt>
-    </motion.div>
-  ))}
-</div>
-
-
-{/* Modal */}
-{selectedProject && (
-<div
-  className="fixed inset-0 bg-black/60 z-[9999] flex items-end md:items-start justify-center pt-32 md:pt-24"
-  onClick={() => setSelectedProject(null)}
->
-
-<motion.div
-  initial={{ y: "100%", opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  exit={{ y: "100%", opacity: 0 }}
-  transition={{ type: "spring", stiffness: 120, damping: 20 }}
-  className="bg-gray-900 rounded-t-3xl w-full md:max-w-4xl max-h-[calc(100vh-6rem)] overflow-y-auto shadow-2xl relative"
-  onClick={(e) => e.stopPropagation()}
->
-
-
-      {/* Project Image */}
-      <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-t-3xl">
-        <img
-          src={selectedProject.image || pimg}
-          alt={selectedProject.title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-        />
-      </div>
-
-      {/* Close Button */}
-      <button
-        className="absolute top-4 right-4 text-slate-200 text-3xl font-bold hover:text-cyan-400"
-        onClick={() => setSelectedProject(null)}
-      >
-        ×
-      </button>
-
-      <div className="p-6">
-        {/* Title & Description */}
-        <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
-          {selectedProject.title}
-        </h3>
-        <p className="text-slate-300 mb-4">{selectedProject.description}</p>
-
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {selectedProject.frontend.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 text-xs md:text-sm rounded-full bg-cyan-400/20 text-cyan-400 font-medium"
-            >
-              {tech}
-            </span>
-          ))}
-          {selectedProject.backend.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 text-xs md:text-sm rounded-full bg-green-400/20 text-green-400 font-medium"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Features */}
-        {selectedProject.features && (
-          <div className="mb-4">
-            <h4 className="text-lg font-semibold text-slate-100 mb-2">Features</h4>
-            <ul className="list-disc list-inside text-slate-300 space-y-1 max-h-40 overflow-y-auto pr-2">
-              {selectedProject.features.map((feature, idx) => (
-                <li key={idx}>{feature}</li>
-              ))}
-            </ul>
           </div>
-        )}
-
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-3">
-          {selectedProject.demo && (
-            <a
-              href={selectedProject.demo}
-              target="_blank"
-              className="flex items-center gap-2 px-4 py-2 rounded-md bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm transition"
-            >
-              Live Demo <FaExternalLinkAlt className="w-3 h-3" />
-            </a>
-          )}
-          {selectedProject.githubFrontend && (
-            <a
-              href={selectedProject.githubFrontend}
-              target="_blank"
-              className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
-            >
-              Frontend Code <FaGithub className="w-3 h-3" />
-            </a>
-          )}
-          {selectedProject.githubBackend && (
-            <a
-              href={selectedProject.githubBackend}
-              target="_blank"
-              className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition"
-            >
-              Backend Code <FaGithub className="w-3 h-3" />
-            </a>
-          )}
-        </div>
+        </motion.div>
       </div>
-    </motion.div>
+    )}
   </div>
-)}
+</section>
 
-
-      </div>
-    </section>
   );
 }
