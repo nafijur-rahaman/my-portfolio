@@ -66,7 +66,7 @@ const projectsData = [
     image: triporaImg,
     frontend: ["React", "Tailwind CSS", "Framer Motion", "React Slick", "Axios", "React Router"],
     backend: ["Node.js", "Express.js", "MongoDB Atlas", "Firebase Admin", "JWT-based Token Auth"],
-    demo: "https://tripora-frontend.vercel.app",
+    demo: "https://tripora-amber.vercel.app/",
     githubFrontend: "https://github.com/nafijur-rahaman/Tripora-Frontend",
     githubBackend: "https://github.com/nafijur-rahaman/Tripora-Backend",
     features: [
