@@ -73,7 +73,6 @@ export default function About() {
         { name: "Git", icon: <FaGitAlt className="text-orange-400" /> },
         { name: "Linux", icon: <FaLinux className="text-slate-400" /> },
         { name: "Docker(Basic)", icon: <FaDocker className="text-blue-400" /> },
-        { name: "CI/CD(github actions)" },
       ],
     },
   ];
