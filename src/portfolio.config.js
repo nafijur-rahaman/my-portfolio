@@ -32,22 +32,22 @@ import donationImg from "./assets/donation.webp";
 
 /* ── Theme ─────────────────────────────────────────────────── */
 export const theme = {
-  // "dark" | "light" | "system"
-  defaultMode: "dark",
+  // "light" | "dark" | "system"
+  defaultMode: "light",
   // One of the keys in `accents` below
-  defaultAccent: "cyan",
+  defaultAccent: "ember",
   // Show the theme switcher (mode + accent) in the navbar
   allowVisitorCustomization: true,
-  // Animated particle network in the background
-  particles: true,
-  // Accent presets: [primary, secondary] used for buttons, gradients, highlights.
+  // Subtle film-grain texture over the page
+  grain: true,
+  // Accent presets: used sparingly for links, highlights and focus states.
   // Add your own: any CSS color works.
   accents: {
-    cyan: ["#22d3ee", "#3b82f6"],
-    violet: ["#a78bfa", "#ec4899"],
-    emerald: ["#34d399", "#14b8a6"],
-    amber: ["#fbbf24", "#f97316"],
-    rose: ["#fb7185", "#f43f5e"],
+    ember: "#e2552b",
+    cobalt: "#2f5bea",
+    forest: "#2f7d55",
+    violet: "#7047eb",
+    graphite: "#5b5b57",
   },
 };
 
@@ -58,6 +58,8 @@ export const profile = {
   initials: "N",
   title: "Full-Stack Developer",
   location: "Dhaka, Bangladesh",
+  // IANA time zone, used to show your local time. Set to null to hide.
+  timezone: "Asia/Dhaka",
   email: "tanjidnafis@gmail.com",
   image: profileImage,
   // File in /public. Set to null to hide every resume button.
@@ -74,29 +76,35 @@ export const socials = [
 
 /* ── Sections ──────────────────────────────────────────────── */
 // Reorder or remove entries to change what appears on the page and in the navbar.
+// `label` is used in the navbar and section eyebrow. In `title`, wrap words in
+// *asterisks* to set them in italic accent type.
 export const sections = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: "about", label: "About", title: "Engineer at heart, *builder* by habit." },
+  {
+    id: "skills",
+    label: "Skills",
+    title: "A pragmatic, *modern* stack.",
+    intro: "The languages, frameworks and tools I reach for to take products from idea to production.",
+  },
+  { id: "experience", label: "Experience", title: "Where I've *shipped* work." },
+  { id: "projects", label: "Work", title: "Products I've *designed* and built." },
+  {
+    id: "contact",
+    label: "Contact",
+    title: "Have a project in mind? *Let's talk.*",
+    intro:
+      "Whether it's a product to build, a role to fill or just a question — my inbox is always open and I'll get back to you soon.",
+  },
 ];
 
 /* ── Hero ──────────────────────────────────────────────────── */
 export const hero = {
-  // Rotating words typed out above the headline
-  roles: ["Full-Stack Developer", "Backend Engineer", "React Developer"],
-  // Wrap a word in *asterisks* to highlight it with the accent gradient
-  headline: "Building *end-to-end* web products that scale.",
+  // Wrap words in *asterisks* to set them in italic accent type
+  headline: "Full-stack developer building *reliable* web products — from API to interface.",
   description:
-    "I design and build robust full-stack web apps with React, Django and Node.js — blending performance, clean architecture and thoughtful detail.",
-  primaryCta: { label: "View Projects", href: "#projects" },
-  secondaryCta: { label: "Get in Touch", href: "#contact" },
-  stats: [
-    { value: "1+", label: "Years Experience" },
-    { value: "10+", label: "Projects Built" },
-    { value: "15+", label: "Technologies" },
-  ],
+    "I'm Nafis, a developer based in Dhaka. I design and build robust web applications with React, Django and Node.js, with a focus on clean architecture and the details users notice.",
+  primaryCta: { label: "See selected work", href: "#projects" },
+  secondaryCta: { label: "Get in touch", href: "#contact" },
 };
 
 /* ── About ─────────────────────────────────────────────────── */
@@ -107,12 +115,28 @@ export const about = {
     "I've built my skills across *React*, *Django REST*, *Node.js* and *PostgreSQL*, and I enjoy learning new technologies and figuring out how they can solve real problems.",
     "When I'm not coding, you'll find me exploring AI integrations, contributing to open source, or tinkering with ways to make workflows smarter and faster.",
   ],
-  highlights: [
-    { title: "Clean Architecture", text: "Maintainable, well-tested code built to grow." },
-    { title: "API Design", text: "RESTful services with secure auth and clear contracts." },
-    { title: "Polished UI", text: "Responsive, accessible interfaces with smooth motion." },
+  // Numbers shown under the bio. Remove the array to hide.
+  stats: [
+    { value: "1+", label: "Years of professional experience" },
+    { value: "10+", label: "Projects designed & shipped" },
+    { value: "15+", label: "Technologies in daily use" },
   ],
-  journeyTitle: "My Journey",
+  servicesTitle: "What I do",
+  services: [
+    {
+      title: "Backend & APIs",
+      text: "RESTful services with Django REST and Express — secure auth, clean data models and well-documented endpoints.",
+    },
+    {
+      title: "Frontend Engineering",
+      text: "Responsive, accessible interfaces in React and Next.js that feel fast and are easy to maintain.",
+    },
+    {
+      title: "Full-Stack Products",
+      text: "Taking ideas from schema to deployment — payments, dashboards, roles and everything in between.",
+    },
+  ],
+  journeyTitle: "Journey",
   journey: [
     {
       year: "2023",
@@ -303,14 +327,10 @@ export const projects = [
 ];
 
 /* ── Contact ───────────────────────────────────────────────── */
-export const contact = {
-  heading: "Let's build something together",
-  text: "Have a project in mind, a role to fill, or just want to say hi? My inbox is always open — I'll get back to you as soon as I can.",
-  // Messages are sent with EmailJS when VITE_SERVICE_ID, VITE_TEMPLATE_ID and
-  // VITE_PUBLIC_KEY are set (see .env.example). Otherwise the form opens the
-  // visitor's email app addressed to `profile.email`.
-};
+// The contact form sends messages with EmailJS when VITE_SERVICE_ID,
+// VITE_TEMPLATE_ID and VITE_PUBLIC_KEY are set (see .env.example).
+// Otherwise it opens the visitor's email app addressed to `profile.email`.
 
 export const footer = {
-  tagline: "Designed & built with React, Tailwind CSS and Motion.",
+  tagline: "Designed & built by me with React and Tailwind CSS.",
 };

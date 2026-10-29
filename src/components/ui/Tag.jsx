@@ -1,10 +1,6 @@
-export default function Tag({ children, tone = "accent" }) {
-  const tones = {
-    accent: "bg-accent/10 text-accent-ink border-accent/20",
-    neutral: "bg-surface-2 text-muted border-border",
-  };
+export default function Tag({ children }) {
   return (
-    <span className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium ${tones[tone]}`}>
+    <span className="inline-flex items-center rounded-full border border-border px-2.5 py-1 font-mono text-[11px] text-muted">
       {children}
     </span>
   );

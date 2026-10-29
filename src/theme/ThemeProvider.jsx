@@ -30,10 +30,8 @@ export default function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    const [primary, secondary] = themeConfig.accents[accent];
     root.dataset.theme = mode;
-    root.style.setProperty("--accent", primary);
-    root.style.setProperty("--accent-2", secondary);
+    root.style.setProperty("--accent", themeConfig.accents[accent]);
     if (allowCustom) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, accent }));

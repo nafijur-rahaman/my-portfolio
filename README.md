@@ -4,13 +4,13 @@ A fast, accessible, fully config-driven developer portfolio built with **React 1
 
 ## Features
 
+- **Editorial design**: Instrument Serif display type with Geist and Geist Mono, numbered sections, projects shown as case studies in browser frames, and a warm paper palette with a subtle grain.
 - **One-file customization**: all content lives in [`src/portfolio.config.js`](src/portfolio.config.js).
 - **Theming**: light/dark mode plus accent color presets, saved per visitor. You can add your own presets.
-- **Reorderable sections**: reorder or remove sections in the config, and the navbar updates to match.
-- **Projects**: category filter tabs, "featured" badges, and an accessible detail modal (Esc to close, focus handling, scroll lock).
-- **Contact form**: sends through EmailJS when it's configured. Otherwise it opens the visitor's email app.
-- **Performance**: optimized WebP images, a single shared particle canvas that pauses when the tab is hidden, and support for `prefers-reduced-motion`.
-- **Accessibility**: skip link, focus rings, aria labels, and scroll-spy navigation.
+- **Reorderable sections**: reorder or remove sections in the config. Their titles, the navbar and the numbering update to match.
+- **Projects**: category filters, "featured" labels, and an accessible case-study modal (Esc to close, focus handling, scroll lock).
+- **Contact**: large email link with a copy button, plus a form that sends through EmailJS when configured. Otherwise the form opens the visitor's email app.
+- **Performance and accessibility**: optimized WebP images, `prefers-reduced-motion` support, skip link, focus rings and scroll-spy navigation.
 
 ## Getting started
 
@@ -25,20 +25,20 @@ Everything is in `src/portfolio.config.js`:
 
 | Export       | What it controls |
 | ------------ | ---------------- |
-| `theme`      | Default mode (`dark` / `light` / `system`), default accent, accent presets, particles on/off, visitor theme switcher on/off |
-| `profile`    | Name, title, photo, location, email, resume path, availability badge |
+| `theme`      | Default mode (`light` / `dark` / `system`), default accent, accent presets, grain texture on/off, visitor theme switcher on/off |
+| `profile`    | Name, title, photo, location, time zone (for the local clock), email, resume path, availability badge |
 | `socials`    | Social links (any [react-icons](https://react-icons.github.io/react-icons) icon) |
-| `sections`   | Which sections appear, in what order, and their navbar labels |
-| `hero`       | Rotating roles, headline, description, CTAs, stats |
-| `about`      | Bio paragraphs, highlight cards, journey timeline |
+| `sections`   | Which sections appear and in what order, plus each one's label, title and intro |
+| `hero`       | Headline, description, CTAs |
+| `about`      | Bio paragraphs, stats, "What I do" services, journey timeline |
 | `skills`     | Skill groups with icons and brand colors |
 | `experience` | Jobs, with achievements and tech tags |
 | `projects`   | Projects, with images, stack, features, links, category and `featured` |
-| `contact`, `footer` | Section copy |
+| `footer`     | Footer tagline |
 
 Tips:
 
-- Wrap words in `*asterisks*` in the hero headline or about paragraphs to highlight them with the accent gradient.
+- Wrap words in `*asterisks*` in the hero headline or section titles to set them in italic accent type. In about paragraphs, asterisks make the words bold.
 - Put images in `src/assets/` and import them at the top of the config. WebP at about 1280px wide works best.
 - Replace the resume PDF in `public/` and update `profile.resume`.
 - Update the `<title>` and meta tags in `index.html` for SEO and link previews.

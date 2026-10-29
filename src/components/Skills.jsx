@@ -2,27 +2,28 @@ import { skills } from "../portfolio.config";
 import Section from "./ui/Section";
 import Reveal from "./ui/Reveal";
 
-export default function Skills() {
+export default function Skills({ id, number, label, title, intro }) {
   return (
-    <Section
-      id="skills"
-      eyebrow="Skills"
-      title="Tools I build with"
-      description="The languages, frameworks and tools I use to take products from idea to production."
-    >
-      <div className="grid gap-5 sm:grid-cols-2">
+    <Section id={id} number={number} label={label} title={title} intro={intro}>
+      <div>
         {skills.map((group, i) => (
-          <Reveal key={group.title} delay={i * 0.08} className="card p-6">
-            <h3 className="mb-5 font-mono text-sm tracking-widest text-accent-ink uppercase">{group.title}</h3>
-            <ul className="flex flex-wrap gap-2.5">
+          <Reveal
+            key={group.title}
+            delay={i * 0.06}
+            className="grid gap-5 border-t border-border py-8 last:border-b md:grid-cols-12"
+          >
+            <h3 className="font-display text-3xl md:col-span-3">{group.title}</h3>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 md:col-span-9 lg:grid-cols-4">
               {group.items.map(({ name, icon: Icon, color }) => (
                 <li
                   key={name}
-                  style={{ "--brand": color ?? "var(--accent)" }}
-                  className="group flex items-center gap-2 rounded-xl border border-border bg-surface-2/60 px-3.5 py-2 text-sm font-medium transition hover:-translate-y-0.5 hover:border-[var(--brand)]"
+                  style={{ "--brand": color ?? "var(--fg)" }}
+                  className="group flex items-center gap-3 text-[15px]"
                 >
                   {Icon && (
-                    <Icon className="h-4 w-4 text-muted transition group-hover:text-[var(--brand)]" aria-hidden />
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border bg-surface transition group-hover:border-[var(--brand)]">
+                      <Icon className="h-[18px] w-[18px] text-muted transition group-hover:text-[var(--brand)]" aria-hidden />
+                    </span>
                   )}
                   {name}
                 </li>

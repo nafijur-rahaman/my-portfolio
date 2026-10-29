@@ -1,101 +1,79 @@
 import { useCallback, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, ExternalLink, Star } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
 import { projects } from "../portfolio.config";
-import placeholder from "../assets/project-placeholder.webp";
 import Section from "./ui/Section";
-import Tag from "./ui/Tag";
+import Arrow from "./ui/Arrow";
+import BrowserFrame from "./BrowserFrame";
 import ProjectModal from "./ProjectModal";
 
 const ALL = "All";
 
-function ProjectCard({ project, onOpen }) {
+function ProjectRow({ project, index, onOpen }) {
   const { links = {} } = project;
   const stack = [...(project.frontend ?? []), ...(project.backend ?? [])];
+  const flip = index % 2 === 1;
 
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.4 }}
-      className="card group flex flex-col overflow-hidden transition-colors hover:border-accent/40"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+      className="grid items-center gap-8 border-t border-border py-12 md:grid-cols-12 md:gap-12 md:py-16"
     >
       <button
         onClick={onOpen}
-        className="relative block aspect-[16/10] overflow-hidden text-left"
-        aria-label={`View details for ${project.title}`}
+        aria-label={`Open case study: ${project.title}`}
+        className={`group block text-left md:col-span-7 ${flip ? "md:order-2" : ""}`}
       >
-        <img
-          src={project.image || placeholder}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
+        <BrowserFrame
+          src={project.image}
+          url={links.demo}
+          className="transition duration-500 group-hover:-translate-y-1"
+          imgClassName="transition duration-700 group-hover:scale-[1.03]"
         />
-        <span className="absolute inset-0 flex items-center justify-center bg-black/50 text-sm font-semibold text-white opacity-0 transition group-hover:opacity-100">
-          View details <ArrowUpRight className="ml-1 h-4 w-4" />
-        </span>
-        {project.featured && (
-          <span className="bg-gradient-accent absolute top-3 left-3 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-on-accent shadow">
-            <Star className="h-3 w-3 fill-current" /> Featured
-          </span>
-        )}
       </button>
 
-      <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-xl font-semibold">
-              <button onClick={onOpen} className="text-left transition hover:text-accent-ink">
-                {project.title}
-              </button>
-            </h3>
-            {project.subtitle && <p className="text-sm text-muted">{project.subtitle}</p>}
-          </div>
-          <div className="flex shrink-0 gap-1">
-            {(links.frontend || links.backend) && (
-              <a
-                href={links.frontend || links.backend}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} source code`}
-                className="grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-surface-2 hover:text-fg"
-              >
-                <FaGithub className="h-[18px] w-[18px]" />
-              </a>
-            )}
-            {links.demo && (
-              <a
-                href={links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} live demo`}
-                className="grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-surface-2 hover:text-fg"
-              >
-                <ExternalLink className="h-[18px] w-[18px]" />
-              </a>
-            )}
-          </div>
+      <div className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}>
+        <div className="label flex items-center gap-3">
+          <span className="text-fg">{String(index + 1).padStart(2, "0")}</span>
+          <span className="h-px w-8 bg-border" />
+          <span>{project.category}</span>
+          {project.featured && <span className="text-accent-ink">Featured</span>}
         </div>
+        <h3 className="mt-5 font-display text-5xl leading-none md:text-6xl">{project.title}</h3>
+        {project.subtitle && <p className="mt-3 text-lg">{project.subtitle}</p>}
+        <p className="mt-5 leading-relaxed text-muted">{project.description}</p>
+        <p className="mt-6 font-mono text-xs leading-6 text-muted">{stack.slice(0, 7).join(" / ")}</p>
 
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{project.description}</p>
-
-        <div className="mt-auto flex flex-wrap gap-2 pt-5">
-          {stack.slice(0, 5).map((t) => (
-            <Tag key={t} tone="neutral">
-              {t}
-            </Tag>
-          ))}
-          {stack.length > 5 && <Tag tone="neutral">+{stack.length - 5}</Tag>}
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium">
+          <button onClick={onOpen} className="group inline-flex items-center gap-1.5 rounded-full bg-fg px-4 py-2 text-bg transition hover:bg-accent hover:text-white">
+            Case study <Arrow className="h-3.5 w-3.5" />
+          </button>
+          {links.demo && (
+            <a href={links.demo} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1">
+              <span className="link-underline">Live site</span> <Arrow className="h-3.5 w-3.5" />
+            </a>
+          )}
+          {(links.frontend || links.backend) && (
+            <a
+              href={links.frontend || links.backend}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1"
+            >
+              <span className="link-underline">Source</span> <Arrow className="h-3.5 w-3.5" />
+            </a>
+          )}
         </div>
       </div>
     </motion.article>
   );
 }
 
-export default function Projects() {
+export default function Projects({ id, number, label, title, intro }) {
   const [filter, setFilter] = useState(ALL);
   const [selected, setSelected] = useState(null);
   const closeModal = useCallback(() => setSelected(null), []);
@@ -104,51 +82,36 @@ export default function Projects() {
     () => [ALL, ...new Set(projects.map((p) => p.category).filter(Boolean))],
     []
   );
+  const count = (c) => (c === ALL ? projects.length : projects.filter((p) => p.category === c).length);
   const visible = filter === ALL ? projects : projects.filter((p) => p.category === filter);
 
+  const filters =
+    categories.length > 2 ? (
+      <div role="tablist" aria-label="Filter projects" className="flex flex-wrap gap-x-5 gap-y-2">
+        {categories.map((c) => (
+          <button
+            key={c}
+            role="tab"
+            aria-selected={filter === c}
+            onClick={() => setFilter(c)}
+            className={`text-sm transition ${filter === c ? "text-fg" : "text-subtle hover:text-fg"}`}
+          >
+            <span className={filter === c ? "underline decoration-accent decoration-2 underline-offset-8" : ""}>{c}</span>
+            <sup className="ml-0.5 font-mono text-[10px]">{count(c)}</sup>
+          </button>
+        ))}
+      </div>
+    ) : null;
+
   return (
-    <Section
-      id="projects"
-      eyebrow="Projects"
-      title="Selected work"
-      description="A few things I've designed and built end-to-end. Click any project for the full breakdown."
-    >
-      {categories.length > 2 && (
-        <div role="tablist" aria-label="Filter projects" className="mb-10 flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <button
-              key={c}
-              role="tab"
-              aria-selected={filter === c}
-              onClick={() => setFilter(c)}
-              className={`relative isolate rounded-full px-4 py-2 text-sm font-medium transition ${
-                filter === c ? "text-on-accent" : "border border-border text-muted hover:text-fg"
-              }`}
-            >
-              {filter === c && (
-                <motion.span
-                  layoutId="project-filter"
-                  className="bg-gradient-accent absolute inset-0 -z-10 rounded-full"
-                  transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                />
-              )}
-              {c}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <motion.div layout className="grid gap-6 md:grid-cols-2">
-        <AnimatePresence mode="popLayout">
-          {visible.map((p) => (
-            <ProjectCard key={p.title} project={p} onOpen={() => setSelected(p)} />
-          ))}
-        </AnimatePresence>
-      </motion.div>
-
-      <AnimatePresence>
-        {selected && <ProjectModal project={selected} onClose={closeModal} />}
+    <Section id={id} number={number} label={label} title={title} intro={intro} aside={filters}>
+      <AnimatePresence mode="popLayout" initial={false}>
+        {visible.map((p) => (
+          <ProjectRow key={p.title} project={p} index={projects.indexOf(p)} onOpen={() => setSelected(p)} />
+        ))}
       </AnimatePresence>
+
+      <AnimatePresence>{selected && <ProjectModal project={selected} onClose={closeModal} />}</AnimatePresence>
     </Section>
   );
 }

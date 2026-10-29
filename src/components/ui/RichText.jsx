@@ -1,5 +1,5 @@
-// Renders text where *words in asterisks* get the accent gradient.
-export default function RichText({ text, highlightClassName = "text-gradient font-semibold" }) {
+// Renders text where *words in asterisks* are emphasized (styled via highlightClassName).
+export default function RichText({ text, highlightClassName = "font-medium text-fg" }) {
   return text.split(/(\*[^*]+\*)/g).map((part, i) =>
     part.startsWith("*") && part.endsWith("*") ? (
       <span key={i} className={highlightClassName}>

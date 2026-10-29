@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Moon, Sun, Palette, Check } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../theme/ThemeContext";
 
 export default function ThemeSwitcher() {
@@ -21,49 +21,45 @@ export default function ThemeSwitcher() {
     };
   }, [open]);
 
-  const iconBtn =
-    "grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-surface-2 hover:text-fg";
-
   return (
     <div className="flex items-center gap-1" ref={ref}>
       <button
         onClick={toggleMode}
-        className={iconBtn}
+        className="grid h-9 w-9 place-items-center rounded-full text-muted transition hover:text-fg"
         aria-label={`Switch to ${mode === "dark" ? "light" : "dark"} mode`}
       >
-        {mode === "dark" ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+        {mode === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
       </button>
       <div className="relative">
         <button
           onClick={() => setOpen((o) => !o)}
-          className={iconBtn}
+          className="grid h-9 w-9 place-items-center rounded-full transition hover:scale-110"
           aria-label="Choose accent color"
           aria-expanded={open}
         >
-          <Palette className="h-[18px] w-[18px]" />
+          <span className="h-3.5 w-3.5 rounded-full bg-accent ring-4 ring-accent/15" />
         </button>
         <AnimatePresence>
           {open && (
             <motion.div
-              initial={{ opacity: 0, y: -6, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -6, scale: 0.96 }}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.15 }}
-              className="card absolute right-0 top-12 z-50 flex gap-2 !bg-surface p-3 shadow-xl"
+              className="absolute top-11 right-0 z-50 w-44 rounded-xl border border-border bg-surface p-2 shadow-xl shadow-black/10"
             >
-              {Object.entries(accents).map(([name, [c1, c2]]) => (
+              <p className="label px-2 pt-1 pb-2">Accent</p>
+              {Object.entries(accents).map(([name, color]) => (
                 <button
                   key={name}
                   onClick={() => setAccent(name)}
-                  aria-label={`${name} accent`}
-                  title={name}
-                  className="grid h-7 w-7 place-items-center rounded-full ring-offset-2 ring-offset-surface transition hover:scale-110"
-                  style={{
-                    background: `linear-gradient(135deg, ${c1}, ${c2})`,
-                    boxShadow: accent === name ? `0 0 0 2px var(--surface), 0 0 0 4px ${c1}` : undefined,
-                  }}
+                  className={`flex w-full items-center gap-3 rounded-lg px-2 py-1.5 text-sm capitalize transition hover:bg-surface-2 ${
+                    accent === name ? "text-fg" : "text-muted"
+                  }`}
                 >
-                  {accent === name && <Check className="h-3.5 w-3.5 text-black/70" strokeWidth={3} />}
+                  <span className="h-3 w-3 rounded-full" style={{ background: color }} />
+                  {name}
+                  {accent === name && <span className="ml-auto font-mono text-[10px]">●</span>}
                 </button>
               ))}
             </motion.div>
