@@ -1,22 +1,25 @@
-import React from "react";
+const base =
+  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 active:scale-[0.97] disabled:opacity-60 disabled:pointer-events-none";
 
-export default function Button({ href, onClick, children, variant = "solid", className = "" }) {
-  const base = "inline-flex items-center gap-3 rounded-lg px-5 py-2.5 text-sm font-semibold transition-transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500/50";
-  const styles = {
-    solid: "bg-cyan-400 text-slate-900 shadow-lg hover:bg-cyan-300",
-    ghost: "bg-transparent border border-slate-700 text-slate-200 hover:bg-white/5"
-  };
-  const cls = `${base} ${styles[variant]} ${className}`;
+const variants = {
+  solid:
+    "bg-gradient-accent text-on-accent shadow-lg shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-0.5",
+  outline: "border border-border bg-surface/50 text-fg hover:border-accent hover:text-accent-ink",
+  ghost: "text-muted hover:text-fg hover:bg-surface-2",
+};
 
+export default function Button({ href, variant = "solid", className = "", children, external, ...props }) {
+  const cls = `${base} ${variants[variant]} ${className}`;
   if (href) {
+    const ext = external ?? /^https?:\/\//.test(href);
     return (
-      <a href={href} className={cls} onClick={onClick}>
+      <a href={href} className={cls} {...(ext && { target: "_blank", rel: "noopener noreferrer" })} {...props}>
         {children}
       </a>
     );
   }
   return (
-    <button className={cls} onClick={onClick}>
+    <button className={cls} {...props}>
       {children}
     </button>
   );

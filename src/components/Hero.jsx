@@ -1,166 +1,149 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import heroImage from "../assets/profile.jpg";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { ArrowRight, MapPin, ChevronDown } from "lucide-react";
+import { hero, profile, sections, socials } from "../portfolio.config";
+import Button from "./ui/Button";
+import RichText from "./ui/RichText";
+
+function useTypewriter(words, { type = 90, erase = 45, hold = 1600 } = {}) {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = words[index % words.length];
+    let delay = deleting ? erase : type;
+    if (!deleting && text === word) delay = hold;
+
+    const t = setTimeout(() => {
+      if (!deleting && text === word) setDeleting(true);
+      else if (deleting && text === "") {
+        setDeleting(false);
+        setIndex((i) => i + 1);
+      } else setText(word.slice(0, text.length + (deleting ? -1 : 1)));
+    }, delay);
+    return () => clearTimeout(t);
+  }, [text, deleting, index, words, type, erase, hold]);
+
+  return text;
+}
+
+const fadeUp = (delay) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay, ease: "easeOut" },
+});
 
 export default function Hero() {
-  const words = [
-    "Full-Stack Developer",
-    "Frontend Engineer",
-    "Backend Specialist",
-  ];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-
-  useEffect(() => {
-    let timeout;
-    const word = words[currentWordIndex];
-    let i = 0;
-
-    const type = () => {
-      if (i <= word.length) {
-        setDisplayedText(word.slice(0, i));
-        i++;
-        timeout = setTimeout(type, 120);
-      } else {
-        timeout = setTimeout(deleteText, 1500);
-      }
-    };
-    const deleteText = () => {
-      if (i >= 0) {
-        setDisplayedText(word.slice(0, i));
-        i--;
-        timeout = setTimeout(deleteText, 50);
-      } else {
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
-      }
-    };
-    type();
-    return () => clearTimeout(timeout);
-  }, [currentWordIndex]);
-
-  // Particle generator
-  const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-    const p = Array.from({ length: 25 }).map(() => ({
-      left: Math.random() * 100 + "%",
-      top: Math.random() * 100 + "%",
-      size: Math.random() * 6 + 2,
-      duration: 6 + Math.random() * 6,
-      delay: Math.random() * 5,
-    }));
-    setParticles(p);
-  }, []);
+  const role = useTypewriter(hero.roles);
 
   return (
-    <section
-      id="hero"
-      className="relative overflow-visible min-h-screen flex items-center justify-center bg-gray-950 text-slate-100 px-6 md:px-12"
-    >
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {particles.map((p, i) => (
-          <motion.span
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              background: `radial-gradient(circle, rgba(0,255,255,0.7), transparent 70%)`,
-              width: p.size,
-              height: p.size,
-              left: p.left,
-              top: p.top,
-              filter: "blur(1px)",
-            }}
-            animate={{
-              y: ["0vh", "-120vh"],
-              opacity: [1, 0.2],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: p.duration,
-              delay: p.delay,
-              ease: "easeOut",
-            }}
-          />
-        ))}
-      </div>
+    <section id="hero" className="relative flex min-h-[100svh] items-center pt-28 pb-16">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-6 md:grid-cols-12">
+        <div className="md:col-span-7">
+          {profile.availability && (
+            <motion.div
+              {...fadeUp(0)}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm text-muted backdrop-blur"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              {profile.availability}
+            </motion.div>
+          )}
 
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-10 left-10 w-[280px] md:w-[400px]  h-[400px] bg-cyan-500/20 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-6xl mx-auto mt-32 md:mt-0 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-        {/* Left Text Section */}
-        <div className="md:col-span-7 flex flex-col gap-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight"
-          >
-            <span className="text-cyan-400">{displayedText}</span>
-            <br />
-            Building{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-400 animate-gradient-x">
-              End-to-End
-            </span>{" "}
-            Web Solutions
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-slate-300 max-w-2xl"
-          >
-            I design and build robust full-stack web apps with React, Django,
-            and modern tech — blending performance, scalability, and aesthetic
-            detail.
+          <motion.p {...fadeUp(0.1)} className="font-mono text-base text-accent-ink sm:text-lg">
+            Hi, I'm {profile.shortName} —{" "}
+            <span className="text-fg">{role}</span>
+            <span className="ml-0.5 inline-block h-5 w-[2px] translate-y-1 animate-pulse bg-accent" />
           </motion.p>
 
-          <div className="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4 items-center mt-4">
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05 }}
-              className="w-full sm:w-auto text-center inline-flex justify-center items-center px-5 sm:px-6 py-2.5 sm:py-3 
-               bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900 font-semibold 
-               rounded-3xl shadow-lg hover:shadow-cyan-400/50 hover:scale-105 
-               transition-all duration-300"
-            >
-              View Projects <ArrowRight className="w-4 h-4 ml-2" />
-            </motion.a>
-
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              className="w-full sm:w-auto text-center px-5 sm:px-6 py-2 sm:py-2.5 
-               rounded-full border border-cyan-400 text-cyan-400 
-               font-semibold text-base sm:text-lg 
-               hover:bg-cyan-400/10 transition"
-            >
-              Get in Touch
-            </motion.a>
-          </div>
-        </div>
-
-        {/* Right - Profile */}
-        <div className="md:col-span-5 flex justify-center relative">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 120 }}
-            className="relative rounded-full overflow-hidden border-4 border-cyan-400/40 shadow-[0_0_40px_rgba(0,255,255,0.4)]"
+          <motion.h1
+            {...fadeUp(0.2)}
+            className="mt-4 text-4xl leading-[1.1] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
           >
-            <motion.img
-              src={heroImage}
-              alt="Full-Stack Developer"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="w-72 h-72 md:w-96 md:h-96 object-cover rounded-full"
-            />
+            <RichText text={hero.headline} highlightClassName="text-gradient" />
+          </motion.h1>
+
+          <motion.p {...fadeUp(0.3)} className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+            {hero.description}
+          </motion.p>
+
+          <motion.div {...fadeUp(0.4)} className="mt-8 flex flex-wrap items-center gap-3">
+            {hero.primaryCta && (
+              <Button href={hero.primaryCta.href}>
+                {hero.primaryCta.label} <ArrowRight className="h-4 w-4" />
+              </Button>
+            )}
+            {hero.secondaryCta && (
+              <Button href={hero.secondaryCta.href} variant="outline">
+                {hero.secondaryCta.label}
+              </Button>
+            )}
+            <div className="ml-1 flex items-center gap-1 md:hidden">
+              {socials.map(({ href, label, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="grid h-10 w-10 place-items-center rounded-full text-muted transition hover:text-accent-ink"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
           </motion.div>
+
+          {hero.stats?.length > 0 && (
+            <motion.dl {...fadeUp(0.5)} className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
+              {hero.stats.map((s) => (
+                <div key={s.label} className="flex flex-col-reverse">
+                  <dt className="text-sm text-muted">{s.label}</dt>
+                  <dd className="text-gradient text-3xl font-bold">{s.value}</dd>
+                </div>
+              ))}
+            </motion.dl>
+          )}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="relative mx-auto md:col-span-5"
+        >
+          <div className="bg-gradient-accent absolute -inset-4 rounded-[2.5rem] opacity-30 blur-2xl" />
+          <div className="bg-gradient-accent relative rounded-[2.2rem] p-[2px]">
+            <img
+              src={profile.image}
+              alt={profile.name}
+              width="400"
+              height="480"
+              fetchPriority="high"
+              className="aspect-[5/6] w-64 rounded-[2.1rem] bg-surface object-cover sm:w-80 lg:w-96"
+            />
+          </div>
+          {profile.location && (
+            <div className="card absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 !bg-surface px-4 py-2 text-sm whitespace-nowrap shadow-lg">
+              <MapPin className="h-4 w-4 text-accent-ink" /> {profile.location}
+            </div>
+          )}
+        </motion.div>
       </div>
+
+      {sections[0] && (
+      <a
+        href={`#${sections[0].id}`}
+        aria-label="Scroll down"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-subtle transition hover:text-fg md:block"
+      >
+        <ChevronDown className="h-6 w-6 animate-bounce" />
+      </a>
+      )}
     </section>
   );
 }
