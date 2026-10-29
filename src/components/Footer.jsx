@@ -1,55 +1,30 @@
-import React from "react";
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
+import { profile, socials, footer } from "../portfolio.config";
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
-    <footer className="relative bg-gray-950 text-slate-100 py-12">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-        {/* Footer Info */}
+    <footer className="border-t border-border">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 md:flex-row">
         <div className="text-center md:text-left">
-          <p className="text-slate-400">
-            © {new Date().getFullYear()} Nafis. All rights reserved.
+          <p className="font-semibold">{profile.name}</p>
+          <p className="mt-1 text-sm text-muted">
+            © {new Date().getFullYear()} · {footer.tagline}
           </p>
-          <p className="text-slate-500 text-sm">Full-Stack Developer</p>
         </div>
-
-        {/* Social Links */}
-        <div className="flex gap-4">
-          <a
-            href="https://github.com/nafijur-rahaman"
-            target="_blank"
-            className="text-2xl text-slate-100 hover:text-cyan-400 transition"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://linkedin.com/in/nafijur-rahaman"
-            target="_blank"
-            className="text-2xl text-slate-100 hover:text-blue-500 transition"
-          >
-            <FaLinkedin />
-          </a>
-          <a
-            href="mailto:tanjidnafis@gmail.com"
-            target="_blank"
-            className="text-2xl text-slate-100 hover:text-rose-500 transition"
-          >
-            <FaEnvelope />
-          </a>
+        <div className="flex gap-1">
+          {socials.map(({ href, label, icon: Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="grid h-10 w-10 place-items-center rounded-full text-muted transition hover:bg-surface-2 hover:text-fg"
+            >
+              <Icon className="h-5 w-5" />
+            </a>
+          ))}
         </div>
       </div>
-
-      {/* Back-to-Top Button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-gray-900  p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-50"
-      >
-        <FaArrowUp />
-      </button>
     </footer>
   );
 }
