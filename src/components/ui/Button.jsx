@@ -1,11 +1,11 @@
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 active:scale-[0.97] disabled:opacity-60 disabled:pointer-events-none";
+  "group/btn inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-60";
 
 const variants = {
-  solid:
-    "bg-gradient-accent text-on-accent shadow-lg shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-0.5",
-  outline: "border border-border bg-surface/50 text-fg hover:border-accent hover:text-accent-ink",
-  ghost: "text-muted hover:text-fg hover:bg-surface-2",
+  solid: "bg-fg text-bg hover:bg-accent hover:text-white",
+  accent: "bg-accent text-white hover:brightness-110",
+  outline: "border border-border text-fg hover:border-fg",
+  ghost: "text-muted hover:text-fg",
 };
 
 export default function Button({ href, variant = "solid", className = "", children, external, ...props }) {

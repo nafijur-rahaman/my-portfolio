@@ -1,149 +1,102 @@
-import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, MapPin, ChevronDown } from "lucide-react";
-import { hero, profile, sections, socials } from "../portfolio.config";
+import { ArrowDown } from "lucide-react";
+import { experience, hero, profile, sections } from "../portfolio.config";
+import useLocalTime from "../hooks/useLocalTime";
 import Button from "./ui/Button";
 import RichText from "./ui/RichText";
 
-function useTypewriter(words, { type = 90, erase = 45, hold = 1600 } = {}) {
-  const [index, setIndex] = useState(0);
-  const [text, setText] = useState("");
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    const word = words[index % words.length];
-    let delay = deleting ? erase : type;
-    if (!deleting && text === word) delay = hold;
-
-    const t = setTimeout(() => {
-      if (!deleting && text === word) setDeleting(true);
-      else if (deleting && text === "") {
-        setDeleting(false);
-        setIndex((i) => i + 1);
-      } else setText(word.slice(0, text.length + (deleting ? -1 : 1)));
-    }, delay);
-    return () => clearTimeout(t);
-  }, [text, deleting, index, words, type, erase, hold]);
-
-  return text;
-}
-
-const fadeUp = (delay) => ({
-  initial: { opacity: 0, y: 24 },
+const ease = [0.2, 0.7, 0.2, 1];
+const rise = (delay) => ({
+  initial: { opacity: 0, y: 28 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, delay, ease: "easeOut" },
+  transition: { duration: 0.9, delay, ease },
 });
 
 export default function Hero() {
-  const role = useTypewriter(hero.roles);
+  const time = useLocalTime(profile.timezone);
+  const current = experience.find((e) => /present/i.test(e.period));
+
+  const meta = [
+    profile.location && ["Based in", profile.location],
+    current && ["Currently", `${current.role} at ${current.company}`],
+    time && ["Local time", `${time} (GMT${tzOffset(profile.timezone)})`],
+  ].filter(Boolean);
 
   return (
-    <section id="hero" className="relative flex min-h-[100svh] items-center pt-28 pb-16">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-6 md:grid-cols-12">
-        <div className="md:col-span-7">
+    <section id="hero" className="relative flex min-h-[100svh] flex-col justify-end pt-28 pb-10 md:pt-32">
+      <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
+        <motion.div {...rise(0)} className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-2 md:mb-10">
+          <span className="label">
+            {profile.name} — {profile.title}
+          </span>
           {profile.availability && (
-            <motion.div
-              {...fadeUp(0)}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm text-muted backdrop-blur"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="label flex items-center gap-2 !text-fg">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               {profile.availability}
-            </motion.div>
+            </span>
           )}
+        </motion.div>
 
-          <motion.p {...fadeUp(0.1)} className="font-mono text-base text-accent-ink sm:text-lg">
-            Hi, I'm {profile.shortName} —{" "}
-            <span className="text-fg">{role}</span>
-            <span className="ml-0.5 inline-block h-5 w-[2px] translate-y-1 animate-pulse bg-accent" />
-          </motion.p>
+        <motion.h1
+          {...rise(0.1)}
+          className="max-w-6xl font-display text-[clamp(2.9rem,8.2vw,8rem)] leading-[0.95] tracking-[-0.02em]"
+        >
+          <RichText text={hero.headline} highlightClassName="italic text-accent" />
+        </motion.h1>
 
-          <motion.h1
-            {...fadeUp(0.2)}
-            className="mt-4 text-4xl leading-[1.1] font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
-          >
-            <RichText text={hero.headline} highlightClassName="text-gradient" />
-          </motion.h1>
-
-          <motion.p {...fadeUp(0.3)} className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            {hero.description}
-          </motion.p>
-
-          <motion.div {...fadeUp(0.4)} className="mt-8 flex flex-wrap items-center gap-3">
-            {hero.primaryCta && (
-              <Button href={hero.primaryCta.href}>
-                {hero.primaryCta.label} <ArrowRight className="h-4 w-4" />
-              </Button>
-            )}
-            {hero.secondaryCta && (
-              <Button href={hero.secondaryCta.href} variant="outline">
-                {hero.secondaryCta.label}
-              </Button>
-            )}
-            <div className="ml-1 flex items-center gap-1 md:hidden">
-              {socials.map(({ href, label, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full text-muted transition hover:text-accent-ink"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              ))}
+        <div className="mt-14 grid gap-10 border-t border-border pt-8 md:mt-20 md:grid-cols-12">
+          <motion.div {...rise(0.3)} className="md:col-span-5">
+            <p className="max-w-md text-lg leading-relaxed text-muted">{hero.description}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              {hero.primaryCta && <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>}
+              {hero.secondaryCta && (
+                <Button href={hero.secondaryCta.href} variant="outline">
+                  {hero.secondaryCta.label}
+                </Button>
+              )}
             </div>
           </motion.div>
 
-          {hero.stats?.length > 0 && (
-            <motion.dl {...fadeUp(0.5)} className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
-              {hero.stats.map((s) => (
-                <div key={s.label} className="flex flex-col-reverse">
-                  <dt className="text-sm text-muted">{s.label}</dt>
-                  <dd className="text-gradient text-3xl font-bold">{s.value}</dd>
-                </div>
-              ))}
-            </motion.dl>
-          )}
-        </div>
+          <motion.dl {...rise(0.4)} className="grid content-start gap-5 md:col-span-4 md:col-start-7">
+            {meta.map(([k, v]) => (
+              <div key={k} className="grid grid-cols-[7rem_1fr] gap-4 text-sm">
+                <dt className="label pt-0.5">{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </motion.dl>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="relative mx-auto md:col-span-5"
-        >
-          <div className="bg-gradient-accent absolute -inset-4 rounded-[2.5rem] opacity-30 blur-2xl" />
-          <div className="bg-gradient-accent relative rounded-[2.2rem] p-[2px]">
+          <motion.div {...rise(0.5)} className="hidden md:col-span-2 md:flex md:flex-col md:items-end md:justify-between">
             <img
               src={profile.image}
               alt={profile.name}
-              width="400"
-              height="480"
+              width="160"
+              height="200"
               fetchPriority="high"
-              className="aspect-[5/6] w-64 rounded-[2.1rem] bg-surface object-cover sm:w-80 lg:w-96"
+              className="aspect-[4/5] w-full max-w-[9rem] rounded-md object-cover grayscale transition duration-500 hover:grayscale-0"
             />
-          </div>
-          {profile.location && (
-            <div className="card absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 !bg-surface px-4 py-2 text-sm whitespace-nowrap shadow-lg">
-              <MapPin className="h-4 w-4 text-accent-ink" /> {profile.location}
-            </div>
-          )}
-        </motion.div>
+            {sections[0] && (
+              <a href={`#${sections[0].id}`} className="label mt-6 flex items-center gap-2 hover:!text-fg">
+                Scroll <ArrowDown className="h-3 w-3" />
+              </a>
+            )}
+          </motion.div>
+        </div>
       </div>
-
-      {sections[0] && (
-      <a
-        href={`#${sections[0].id}`}
-        aria-label="Scroll down"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-subtle transition hover:text-fg md:block"
-      >
-        <ChevronDown className="h-6 w-6 animate-bounce" />
-      </a>
-      )}
     </section>
   );
+}
+
+function tzOffset(timeZone) {
+  try {
+    const part = new Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "shortOffset" })
+      .formatToParts(new Date())
+      .find((p) => p.type === "timeZoneName");
+    return part.value.replace("GMT", "") || "+0";
+  } catch {
+    return "";
+  }
 }

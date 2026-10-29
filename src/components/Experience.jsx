@@ -1,68 +1,70 @@
-import { Briefcase, Check } from "lucide-react";
 import { experience } from "../portfolio.config";
 import Section from "./ui/Section";
 import Reveal from "./ui/Reveal";
-import Tag from "./ui/Tag";
+import Arrow from "./ui/Arrow";
 
-export default function Experience() {
+export default function Experience({ id, number, label, title, intro }) {
   return (
-    <Section id="experience" eyebrow="Experience" title="Where I've worked">
-      <ol className="relative space-y-8 border-l border-border pl-8 md:pl-10">
+    <Section id={id} number={number} label={label} title={title} intro={intro}>
+      <ol>
         {experience.map((exp, i) => (
-          <Reveal as="li" key={`${exp.company}-${exp.role}`} delay={i * 0.1} className="relative">
-            <span className="bg-gradient-accent absolute top-6 -left-[calc(2rem+1.25rem+0.5px)] grid h-10 w-10 place-items-center rounded-full text-on-accent shadow-lg ring-4 ring-bg md:-left-[calc(2.5rem+1.25rem+0.5px)]">
-              <Briefcase className="h-4 w-4" />
-            </span>
+          <Reveal
+            as="li"
+            key={`${exp.company}-${exp.role}`}
+            delay={i * 0.08}
+            className="grid gap-6 border-t border-border py-10 last:border-b md:grid-cols-12"
+          >
+            <div className="md:col-span-3">
+              <p className="font-mono text-sm">{exp.period}</p>
+              {(exp.type || exp.location) && (
+                <p className="mt-1 text-sm text-muted">{[exp.type, exp.location].filter(Boolean).join(" · ")}</p>
+              )}
+            </div>
 
-            <article className="card p-6 transition hover:border-accent/40 md:p-8">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  {exp.logo && (
-                    <img
-                      src={exp.logo}
-                      alt=""
-                      className="h-12 w-12 rounded-xl border border-border bg-white object-contain p-1.5"
-                    />
+            <div className="md:col-span-6">
+              <div className="flex items-center gap-4">
+                {exp.logo && (
+                  <img
+                    src={exp.logo}
+                    alt=""
+                    className="h-11 w-11 rounded-lg border border-border bg-white object-contain p-1.5"
+                  />
+                )}
+                <div>
+                  <h3 className="font-display text-3xl leading-tight md:text-4xl">{exp.role}</h3>
+                  {exp.url ? (
+                    <a
+                      href={exp.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1 text-accent-ink"
+                    >
+                      {exp.company} <Arrow className="h-3.5 w-3.5" />
+                    </a>
+                  ) : (
+                    <p className="text-accent-ink">{exp.company}</p>
                   )}
-                  <div>
-                    <h3 className="text-xl font-semibold">{exp.role}</h3>
-                    <p className="text-muted">
-                      {exp.url ? (
-                        <a href={exp.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent-ink">
-                          {exp.company}
-                        </a>
-                      ) : (
-                        exp.company
-                      )}
-                      {exp.type && <span> · {exp.type}</span>}
-                      {exp.location && <span> · {exp.location}</span>}
-                    </p>
-                  </div>
                 </div>
-                <span className="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted">
-                  {exp.period}
-                </span>
               </div>
 
-              {exp.description && <p className="mt-5 leading-relaxed text-muted">{exp.description}</p>}
+              {exp.description && <p className="mt-6 leading-relaxed text-muted">{exp.description}</p>}
 
               {exp.achievements?.length > 0 && (
-                <ul className="mt-4 space-y-2">
+                <ul className="mt-5 space-y-3">
                   {exp.achievements.map((a) => (
-                    <li key={a} className="flex gap-3 text-muted">
-                      <Check className="mt-1 h-4 w-4 shrink-0 text-accent-ink" />
+                    <li key={a} className="flex gap-4 text-muted">
+                      <span className="mt-[0.7em] h-px w-4 shrink-0 bg-fg/40" />
                       <span>{a}</span>
                     </li>
                   ))}
                 </ul>
               )}
+            </div>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {exp.tech.map((t) => (
-                  <Tag key={t}>{t}</Tag>
-                ))}
-              </div>
-            </article>
+            <div className="md:col-span-3">
+              <p className="label mb-3">Stack</p>
+              <p className="font-mono text-xs leading-6 text-muted">{exp.tech.join(" / ")}</p>
+            </div>
           </Reveal>
         ))}
       </ol>
